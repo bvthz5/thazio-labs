@@ -33,8 +33,8 @@ export default function HeroContent() {
     e.preventDefault();
     const element = document.getElementById(targetId);
     if (element) {
-      if (typeof window !== 'undefined' && (window as any).lenis) {
-        (window as any).lenis.scrollTo(element, {
+      if (typeof window !== 'undefined' && 'lenis' in window && (window as unknown as { lenis: { scrollTo: (el: HTMLElement, opts: unknown) => void } }).lenis) {
+        (window as unknown as { lenis: { scrollTo: (el: HTMLElement, opts: unknown) => void } }).lenis.scrollTo(element, {
           offset: -72,
           duration: 1.0,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))

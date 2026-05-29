@@ -8,7 +8,7 @@ import * as THREE from 'three';
 // Suppress THREE.Clock deprecation warning triggered by @react-three/fiber in Three.js r184
 if (typeof console !== 'undefined') {
   const originalWarn = console.warn;
-  console.warn = (...args: any[]) => {
+  console.warn = (...args: unknown[]) => {
     if (typeof args[0] === 'string' && args[0].includes('THREE.Clock')) return;
     originalWarn.apply(console, args);
   };

@@ -35,7 +35,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
         try {
           // Try to play with sound first
           await videoRef.current.play();
-        } catch (err) {
+        } catch {
           // If browser blocks unmuted autoplay, instantly fallback to muted so the video still plays automatically!
           if (videoRef.current) {
             videoRef.current.muted = true;

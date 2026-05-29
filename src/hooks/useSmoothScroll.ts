@@ -25,7 +25,7 @@ export function useSmoothScroll() {
 
     // Expose Lenis globally to allow high-performance coordinated scrolls across the app
     if (typeof window !== 'undefined') {
-      (window as any).lenis = lenis;
+      (window as unknown as { lenis: Lenis }).lenis = lenis;
     }
 
     // Update GSAP triggers on scroll
@@ -79,7 +79,7 @@ export function useSmoothScroll() {
       cancelAnimationFrame(rafId);
       lenis.destroy();
       if (typeof window !== 'undefined') {
-        delete (window as any).lenis;
+        delete (window as unknown as Record<string, unknown>).lenis;
       }
       if (typeof document !== 'undefined') {
         document.removeEventListener('click', handleAnchorClick);
