@@ -11,7 +11,7 @@ export default function Footer() {
             <div className="footer-logo" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-5)' }}>
               <div style={{ position: 'relative', width: '28px', height: '28px', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.15)' }}>
                 <Image 
-                  src="/images/logo.jpeg" 
+                  src="/images/logo_transparent.png" 
                   alt="THAZIO Logo" 
                   fill
                   sizes="28px"
