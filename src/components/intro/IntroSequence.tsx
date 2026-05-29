@@ -322,7 +322,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
               willChange: 'opacity',
             }}
           >
-            <source src="/videos/intro.mp4" type="video/mp4" />
+            <source src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/videos/intro.mp4`} type="video/mp4" />
           </video>
 
           {/* Luxury ambient vignette overlay - provides text contrast organically */}

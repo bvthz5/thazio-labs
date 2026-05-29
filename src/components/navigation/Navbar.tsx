@@ -54,7 +54,7 @@ export default function Navbar() {
           style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}
         >
           <motion.img 
-            src="/images/logo_transparent.png" 
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/logo_transparent.png`} 
             alt="Thazio Neural Logo" 
             width={48} 
             height={48} 
