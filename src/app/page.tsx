@@ -1,66 +1,120 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
 
-export default function Home() {
+import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+
+// Static imports for lightweight components
+import Footer from '@/components/footer/Footer';
+
+// Dynamic imports for heavy client components
+const IntroSequence = dynamic(() => import('@/components/intro/IntroSequence'), {
+  ssr: false,
+});
+
+const Navbar = dynamic(() => import('@/components/navigation/Navbar'), {
+  ssr: false,
+});
+
+const HeroSection = dynamic(() => import('@/components/hero/HeroSection'), {
+  ssr: false,
+  loading: () => <div style={{ height: '100vh' }} />,
+});
+
+const StatsBar = dynamic(() => import('@/components/stats/StatsBar'), {
+  ssr: false,
+  loading: () => <div style={{ height: '200px' }} />,
+});
+
+const ServicesSection = dynamic(() => import('@/components/services/ServicesSection'), {
+  ssr: false,
+  loading: () => <div style={{ height: '100vh' }} />,
+});
+
+const BCISection = dynamic(() => import('@/components/bci/BCISection'), {
+  ssr: false,
+  loading: () => <div style={{ height: '100vh' }} />,
+});
+
+const IndustriesSection = dynamic(() => import('@/components/industries/IndustriesSection'), {
+  ssr: false,
+  loading: () => <div style={{ height: '100vh' }} />,
+});
+
+const InnovationLab = dynamic(() => import('@/components/innovation/InnovationLab'), {
+  ssr: false,
+  loading: () => <div style={{ height: '100vh' }} />,
+});
+
+const InsightsSection = dynamic(() => import('@/components/insights/InsightsSection'), {
+  ssr: false,
+  loading: () => <div style={{ height: '100vh' }} />,
+});
+
+const ContactSection = dynamic(() => import('@/components/contact/ContactSection'), {
+  ssr: false,
+  loading: () => <div style={{ height: '100vh' }} />,
+});
+
+export default function HomePage() {
+  // Always start with intro incomplete to play it on every single reload
+  const [introComplete, setIntroComplete] = useState<boolean>(false);
+  const [showContent, setShowContent] = useState<boolean>(false);
+
+  const handleIntroComplete = () => {
+    // Reveal homepage content smoothly
+    setShowContent(true);
+    // Unmount intro overlay strictly after the cross-fade finishes
+    setTimeout(() => {
+      setIntroComplete(true);
+    }, 1200);
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      {/* Cinematic Intro Sequence (always mounts on reload) */}
+      {!introComplete && <IntroSequence onComplete={handleIntroComplete} />}
+
+      {/* Main Content */}
+      <div
+        style={{
+          opacity: showContent ? 1 : 0,
+          transition: 'opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1)', // longer, ultra-smooth cross-fade transition
+          pointerEvents: showContent ? 'auto' : 'none', // Prevent interaction during intro
+          position: 'relative',
+          width: '100%',
+        }}
+      >
+        <Navbar />
+
+        <main>
+          {/* Hero Section */}
+          <HeroSection active={showContent} />
+
+          {/* Stats Bar */}
+          <StatsBar />
+
+          {/* Services Section */}
+          <ServicesSection />
+
+          {/* BCI Storytelling Section */}
+          <BCISection />
+
+          {/* Industries Section */}
+          <IndustriesSection />
+
+          {/* Innovation Lab */}
+          <InnovationLab />
+
+          {/* Insights Section */}
+          <InsightsSection />
+
+          {/* Contact Section */}
+          <ContactSection />
+        </main>
+
+        {/* Footer */}
+        <Footer />
+      </div>
+    </>
   );
 }

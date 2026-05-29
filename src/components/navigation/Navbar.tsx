@@ -1,0 +1,178 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { NAV_LINKS } from '@/lib/constants';
+import { motion } from 'motion/react';
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      if (typeof window !== 'undefined' && (window as any).lenis) {
+        (window as any).lenis.scrollTo(element, {
+          offset: -72,
+          duration: 1.0,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+      } else {
+        const navHeight = 72;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - navHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
+  return (
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <div className="navbar-inner">
+        {/* Logo */}
+        <a 
+          href="#hero" 
+          className="navbar-logo"
+          onClick={(e) => handleNavClick(e, '#hero')}
+          style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}
+        >
+          <motion.img 
+            src="/images/logo_transparent.png" 
+            alt="Thazio Neural Logo" 
+            width={48} 
+            height={48} 
+            style={{ 
+              display: 'block', 
+              objectFit: 'contain', 
+            }}
+            animate={{ 
+              y: [0, -5, 0],
+              scale: [1, 1.05, 1]
+            }}
+            transition={{
+              duration: 4.5,
+              repeat: Infinity,
+              ease: 'easeInOut'
+            }}
+            whileHover={{
+              scale: 1.15,
+              rotate: [0, -3, 3, 0],
+              transition: { duration: 0.5 }
+            }}
+          />
+          <span style={{ letterSpacing: '0.08em', fontWeight: 700 }}>THAZIO</span>
+        </a>
+
+        {/* Links (Desktop) */}
+        <ul className="navbar-links">
+          {NAV_LINKS.map((link) => (
+            <li key={link.label}>
+              <a 
+                href={link.href} 
+                onClick={(e) => handleNavClick(e, link.href)}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Action Button (Desktop) */}
+        <div className="navbar-cta hide-mobile">
+          <a 
+            href="#contact" 
+            className="btn btn-primary"
+            onClick={(e) => handleNavClick(e, '#contact')}
+            style={{ padding: '8px 24px', fontSize: '0.85rem' }}
+          >
+            Connect
+          </a>
+        </div>
+
+        {/* Mobile Hamburger Toggle */}
+        <button 
+          className="navbar-mobile-toggle"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle Navigation Menu"
+        >
+          <span style={{ 
+            transform: mobileMenuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none',
+            background: 'var(--color-obsidian)'
+          }} />
+          <span style={{ 
+            opacity: mobileMenuOpen ? 0 : 1,
+            background: 'var(--color-obsidian)'
+          }} />
+          <span style={{ 
+            transform: mobileMenuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
+            background: 'var(--color-obsidian)'
+          }} />
+        </button>
+      </div>
+
+      {/* Mobile Menu Panel (Glassmorphism Overlay) */}
+      <div style={{
+        position: 'fixed',
+        top: 'var(--nav-height)',
+        left: 0,
+        width: '100%',
+        height: 'calc(100vh - var(--nav-height))',
+        background: 'var(--glass-bg-strong)',
+        backdropFilter: 'var(--glass-blur-strong)',
+        WebkitBackdropFilter: 'var(--glass-blur-strong)',
+        zIndex: 999,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 'var(--space-8)',
+        opacity: mobileMenuOpen ? 1 : 0,
+        pointerEvents: mobileMenuOpen ? 'all' : 'none',
+        transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-20px)',
+        transition: 'all 0.4s var(--ease-out-expo)',
+        borderTop: '1px solid rgba(0, 0, 0, 0.05)',
+      }}>
+        {NAV_LINKS.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            onClick={(e) => handleNavClick(e, link.href)}
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'var(--text-xl)',
+              fontWeight: 600,
+              color: 'var(--color-obsidian)',
+            }}
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href="#contact"
+          className="btn btn-neural"
+          onClick={(e) => handleNavClick(e, '#contact')}
+          style={{ width: '200px', marginTop: 'var(--space-4)' }}
+        >
+          Connect
+        </a>
+      </div>
+    </nav>
+  );
+}
