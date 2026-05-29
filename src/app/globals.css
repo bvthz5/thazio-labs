@@ -55,8 +55,8 @@
   --text-2xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
   --text-3xl: clamp(2rem, 1.5rem + 2vw, 3rem);
   --text-4xl: clamp(2.5rem, 1.8rem + 3vw, 4rem);
-  --text-5xl: clamp(3rem, 2rem + 4vw, 5.5rem);
-  --text-6xl: clamp(3.5rem, 2.5rem + 5vw, 7rem);
+  --text-5xl: clamp(2.2rem, 1.8rem + 4vw, 5.5rem);
+  --text-6xl: clamp(2.8rem, 2rem + 5vw, 7rem);
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -221,7 +221,7 @@ img {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 3vw, 4rem);
+  padding: 0 clamp(1rem, 3vw, 4rem);
 }
 
 .section {
@@ -443,6 +443,20 @@ img {
   .grid-2 { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 480px) {
+  .grid-5 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: 1fr; }
+  
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-buttons a {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* ─── Keyframe Animations ─────────────────────────────────── */
 @keyframes shimmer {
   0% { background-position: 0% center; }
@@ -615,7 +629,7 @@ img {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 3vw, 4rem);
+  padding: 0 clamp(1rem, 3vw, 4rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -734,7 +748,7 @@ img {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-20) clamp(1.5rem, 3vw, 4rem);
+  padding: var(--space-20) clamp(1rem, 3vw, 4rem);
 }
 
 .hero-content {
@@ -829,7 +843,7 @@ img {
 .bci-inner {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 3vw, 4rem);
+  padding: 0 clamp(1rem, 3vw, 4rem);
 }
 
 .bci-header {
@@ -973,6 +987,19 @@ img {
   }
   .bci-features {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .bci-node {
+    width: 200px;
+    height: 200px;
+  }
+  .bci-node-icon {
+    font-size: 2.5rem;
+  }
+  .bci-node-label {
+    font-size: var(--text-base);
   }
 }
 
@@ -1197,8 +1224,14 @@ img {
 
 .innovation-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .innovation-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
 }
 
 .innovation-card {
@@ -1585,7 +1618,7 @@ img {
 .footer-inner {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 3vw, 4rem);
+  padding: 0 clamp(1rem, 3vw, 4rem);
 }
 
 .footer-grid {
