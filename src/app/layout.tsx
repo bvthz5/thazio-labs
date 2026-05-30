@@ -20,13 +20,20 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "THAZIO — The Future Neural Intelligence Platform",
-  description:
-    "THAZIO is a next-generation Artificial Intelligence, Brain-Computer Interface, Neural Intelligence, Enterprise Automation, and Emerging Technology company engineering intelligent futures.",
-  icons: {
-    icon: '/images/logo_transparent.png',
+  metadataBase: new URL('https://bvthz5.github.io'),
+  title: {
+    default: "THAZIO | The Future Neural Intelligence Platform",
+    template: "%s | THAZIO"
   },
+  description:
+    "THAZIO (sometimes searched as tazhio) is a next-generation Artificial Intelligence, Brain-Computer Interface, Neural Intelligence, Enterprise Automation, and Emerging Technology company engineering intelligent futures.",
+  applicationName: "THAZIO",
+  authors: [{ name: "THAZIO", url: "https://bvthz5.github.io/thazio-labs" }],
+  generator: "Next.js",
   keywords: [
+    "THAZIO",
+    "tazhio",
+    "thazio labs",
     "Artificial Intelligence",
     "Brain-Computer Interface",
     "Neural Intelligence",
@@ -36,27 +43,58 @@ export const metadata: Metadata = {
     "Machine Learning",
     "Deep Learning",
     "AI Engineering",
-    "THAZIO",
   ],
-  authors: [{ name: "THAZIO" }],
+  creator: "THAZIO",
+  publisher: "THAZIO",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: '/thazio-labs',
+  },
   openGraph: {
-    title: "THAZIO — The Future Neural Intelligence Platform",
+    title: "THAZIO | The Future Neural Intelligence Platform",
     description:
-      "Engineering intelligent futures through AI, Brain-Computer Interfaces, and enterprise automation.",
-    type: "website",
-    locale: "en_US",
+      "THAZIO is a next-generation Artificial Intelligence and Brain-Computer Interface company. Engineering intelligent futures through AI and enterprise automation.",
+    url: "https://bvthz5.github.io/thazio-labs",
     siteName: "THAZIO",
+    images: [
+      {
+        url: "/thazio-labs/images/logo_transparent.png",
+        width: 1200,
+        height: 630,
+        alt: "THAZIO Neural Intelligence Platform",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "THAZIO — The Future Neural Intelligence Platform",
+    title: "THAZIO | The Future Neural Intelligence Platform",
     description:
-      "Engineering intelligent futures through AI, Brain-Computer Interfaces, and enterprise automation.",
+      "THAZIO is a next-generation Artificial Intelligence and Brain-Computer Interface company. Engineering intelligent futures through AI and enterprise automation.",
+    images: ["/thazio-labs/images/logo_transparent.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
+  icons: {
+    icon: '/thazio-labs/images/logo_transparent.png',
+    shortcut: '/thazio-labs/images/logo_transparent.png',
+    apple: '/thazio-labs/images/logo_transparent.png',
+  },
+  category: "technology",
 };
 
 export default function RootLayout({
