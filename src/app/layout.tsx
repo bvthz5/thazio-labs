@@ -51,6 +51,11 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  icons: {
+    icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/logo_transparent.png`,
+    shortcut: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/logo_transparent.png`,
+    apple: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/logo_transparent.png`,
+  },
   alternates: {
     canonical: '/thazio-labs',
   },
