@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { NAV_LINKS } from '@/lib/constants';
-import { motion } from 'motion/react';
+
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -51,33 +51,19 @@ export default function Navbar() {
           href="#hero" 
           className="navbar-logo"
           onClick={(e) => handleNavClick(e, '#hero')}
-          style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
         >
-          <motion.img 
+          <img 
             src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/logo_transparent.png`} 
             alt="Thazio Neural Logo" 
-            width={48} 
-            height={48} 
             style={{ 
               display: 'block', 
+              height: '44px',
+              width: 'auto',
               objectFit: 'contain', 
             }}
-            animate={{ 
-              y: [0, -5, 0],
-              scale: [1, 1.05, 1]
-            }}
-            transition={{
-              duration: 4.5,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }}
-            whileHover={{
-              scale: 1.15,
-              rotate: [0, -3, 3, 0],
-              transition: { duration: 0.5 }
-            }}
           />
-          <span style={{ letterSpacing: '0.08em', fontWeight: 700 }}>THAZIO</span>
+          <span style={{ fontFamily: 'var(--font-logo)', fontWeight: 900, fontSize: '1.25rem', lineHeight: 1, letterSpacing: '0.05em' }}>THAZIO</span>
         </a>
 
         {/* Links (Desktop) */}

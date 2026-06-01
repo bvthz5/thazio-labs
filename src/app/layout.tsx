@@ -22,7 +22,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://bvthz5.github.io'),
   title: {
-    default: "THAZIO | The Future Neural Intelligence Platform",
+    default: "THAZIO",
     template: "%s | THAZIO"
   },
   description:
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     canonical: '/thazio-labs',
   },
   openGraph: {
-    title: "THAZIO | The Future Neural Intelligence Platform",
+    title: "THAZIO",
     description:
       "THAZIO is a next-generation Artificial Intelligence and Brain-Computer Interface company. Engineering intelligent futures through AI and enterprise automation.",
     url: "https://bvthz5.github.io/thazio-labs",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "THAZIO | The Future Neural Intelligence Platform",
+    title: "THAZIO",
     description:
       "THAZIO is a next-generation Artificial Intelligence and Brain-Computer Interface company. Engineering intelligent futures through AI and enterprise automation.",
     images: ["/thazio-labs/images/logo_transparent.png"],
@@ -89,11 +89,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    icon: '/thazio-labs/images/logo_transparent.png',
-    shortcut: '/thazio-labs/images/logo_transparent.png',
-    apple: '/thazio-labs/images/logo_transparent.png',
-  },
+
   category: "technology",
 };
 

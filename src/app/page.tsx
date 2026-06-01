@@ -25,12 +25,12 @@ const StatsBar = dynamic(() => import('@/components/stats/StatsBar'), {
   loading: () => <div style={{ height: '200px' }} />,
 });
 
-const ServicesSection = dynamic(() => import('@/components/services/ServicesSection'), {
+const CapabilitiesSection = dynamic(() => import('@/components/bci/BCISection'), {
   ssr: false,
   loading: () => <div style={{ height: '100vh' }} />,
 });
 
-const BCISection = dynamic(() => import('@/components/bci/BCISection'), {
+const ServicesSection = dynamic(() => import('@/components/services/ServicesSection'), {
   ssr: false,
   loading: () => <div style={{ height: '100vh' }} />,
 });
@@ -40,12 +40,12 @@ const IndustriesSection = dynamic(() => import('@/components/industries/Industri
   loading: () => <div style={{ height: '100vh' }} />,
 });
 
-const InnovationLab = dynamic(() => import('@/components/innovation/InnovationLab'), {
+const InsightsSection = dynamic(() => import('@/components/insights/InsightsSection'), {
   ssr: false,
   loading: () => <div style={{ height: '100vh' }} />,
 });
 
-const InsightsSection = dynamic(() => import('@/components/insights/InsightsSection'), {
+const CompanySection = dynamic(() => import('@/components/innovation/InnovationLab'), {
   ssr: false,
   loading: () => <div style={{ height: '100vh' }} />,
 });
@@ -78,8 +78,8 @@ export default function HomePage() {
       <div
         style={{
           opacity: showContent ? 1 : 0,
-          transition: 'opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1)', // longer, ultra-smooth cross-fade transition
-          pointerEvents: showContent ? 'auto' : 'none', // Prevent interaction during intro
+          transition: 'opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1)',
+          pointerEvents: showContent ? 'auto' : 'none',
           position: 'relative',
           width: '100%',
         }}
@@ -93,20 +93,20 @@ export default function HomePage() {
           {/* Stats Bar */}
           <StatsBar />
 
+          {/* Core Capabilities */}
+          <CapabilitiesSection />
+
           {/* Services Section */}
           <ServicesSection />
-
-          {/* BCI Storytelling Section */}
-          <BCISection />
 
           {/* Industries Section */}
           <IndustriesSection />
 
-          {/* Innovation Lab */}
-          <InnovationLab />
-
           {/* Insights Section */}
           <InsightsSection />
+
+          {/* Company Section */}
+          <CompanySection />
 
           {/* Contact Section */}
           <ContactSection />

@@ -23,7 +23,7 @@ const itemVariants: Variants = {
     filter: 'blur(0px)',
     transition: {
       duration: 0.8,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number], // Explicit coordinate tuple type
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
     },
   },
 };
@@ -59,18 +59,13 @@ export default function HeroContent() {
       initial="hidden"
       animate="visible"
     >
-      {/* Overline Label */}
-      <motion.div className="overline" variants={itemVariants}>
-        The Future Neural Intelligence Platform
-      </motion.div>
-
-      {/* Titanium Main Typography */}
+      {/* Main Title — 3 lines */}
       <h1 className="hero-title">
         <motion.span className="hero-title-line" variants={itemVariants}>
-          ENGINEERING
+          THE WORLD&apos;S FIRST
         </motion.span>
-        <motion.span 
-          className="hero-title-line gradient" 
+        <motion.span
+          className="hero-title-line gradient"
           variants={itemVariants}
           style={{
             background: 'var(--gradient-text-neural)',
@@ -82,40 +77,42 @@ export default function HeroContent() {
             fontWeight: 700,
           }}
         >
-          INTELLIGENT
+          FULLY AUTOMATED
         </motion.span>
         <motion.span className="hero-title-line" variants={itemVariants}>
-          FUTURES
+          COMPANY
         </motion.span>
       </h1>
 
-      {/* Subheading */}
+      {/* Subtitle */}
       <motion.p className="hero-subtitle" variants={itemVariants}>
-        Building autonomous AI systems, Brain-Computer Interfaces, enterprise automation platforms, and cognitive digital networks for global leaders.
+        Replace manual operations with intelligent agent networks. Thazio runs your workflows, manages data, and scales infrastructure without human intervention.
       </motion.p>
 
-      {/* Actions */}
+      {/* CTA Buttons */}
       <motion.div className="hero-buttons" variants={itemVariants}>
-        <GlassButton 
-          variant="primary" 
-          href="#solutions"
-          onClick={(e: React.MouseEvent<HTMLButtonElement & HTMLAnchorElement>) => handleScrollTo(e, 'solutions')}
+        <GlassButton
+          variant="primary"
+          href="#services"
+          onClick={(e: React.MouseEvent<HTMLButtonElement & HTMLAnchorElement>) => handleScrollTo(e, 'services')}
         >
-          Explore Solutions
+          Explore Services
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '4px' }}>
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </GlassButton>
-        <GlassButton 
-          variant="secondary" 
-          href="#bci"
-          onClick={(e: React.MouseEvent<HTMLButtonElement & HTMLAnchorElement>) => handleScrollTo(e, 'bci')}
+        <GlassButton
+          variant="secondary"
+          href="#company"
+          onClick={(e: React.MouseEvent<HTMLButtonElement & HTMLAnchorElement>) => handleScrollTo(e, 'company')}
         >
-          Watch Vision
+          Meet the Team
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '4px' }}>
-            <circle cx="12" cy="12" r="10"></circle>
-            <polygon points="10 8 16 12 10 16 10 8"></polygon>
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
           </svg>
         </GlassButton>
       </motion.div>

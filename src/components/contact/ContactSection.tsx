@@ -32,7 +32,7 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="contact-section section">
-      {/* Absolute high-fidelity neural network lines decorative canvas ornament */}
+      {/* Decorative circle */}
       <div 
         style={{
           position: 'absolute',
@@ -54,15 +54,15 @@ export default function ContactSection() {
           <div className="contact-info">
             <SectionHeading
               overline="GET IN TOUCH"
-              title="Let's Build the&#10;Future Together"
-              description="Whether you require custom agentic architecture, cloud synapsis, deep learning models development, or advanced BCI exploration collaborations — we have the engineering strength to scale your operations."
+              title={"Let's Build the\nFuture Together"}
+              description="Whether you need autonomous workflow systems, AI-powered analytics, cloud infrastructure, or strategic consulting — our team is ready to transform your operations."
             />
 
             <div className="contact-details">
               <div className="contact-detail-item">
                 <div className="contact-detail-icon">📧</div>
                 <div className="contact-detail-text">
-                  <h5>Global Operations Office</h5>
+                  <h5>Email Us</h5>
                   <p>hello@thazio.com</p>
                 </div>
               </div>
@@ -70,7 +70,7 @@ export default function ContactSection() {
               <div className="contact-detail-item">
                 <div className="contact-detail-icon">📱</div>
                 <div className="contact-detail-text">
-                  <h5>Direct Access Lines</h5>
+                  <h5>Call Us</h5>
                   <p>+1 (800) THAZIO-AI</p>
                 </div>
               </div>
@@ -78,7 +78,7 @@ export default function ContactSection() {
               <div className="contact-detail-item">
                 <div className="contact-detail-icon">📍</div>
                 <div className="contact-detail-text">
-                  <h5>Innovation HQ</h5>
+                  <h5>Headquarters</h5>
                   <p>San Francisco, California</p>
                 </div>
               </div>
@@ -109,7 +109,7 @@ export default function ContactSection() {
                       animation: 'pulse-glow 1s infinite'
                     }}
                   />
-                  AI Synaptic Response Router: Active
+                  Autonomous Systems: Online
                 </div>
               </div>
             </div>
@@ -144,21 +144,21 @@ export default function ContactSection() {
                 >
                   ✓
                 </div>
-                <h3 style={{ fontFamily: 'var(--font-heading)' }}>Transmission Sent</h3>
+                <h3 style={{ fontFamily: 'var(--font-heading)' }}>Message Sent</h3>
                 <p style={{ maxWidth: '300px', fontSize: 'var(--text-sm)' }}>
-                  Your packet has successfully bypassed gateway filters. Our neural router will establish communication shortly.
+                  Thank you for reaching out. Our team will get back to you within 24 hours.
                 </p>
               </motion.div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-row">
                   <div className="form-group">
-                    <label className="form-label" htmlFor="name">Full Name</label>
+                    <label className="form-label" htmlFor="contact-name">Full Name</label>
                     <input
                       className="form-input"
                       type="text"
-                      id="name"
-                      placeholder="Alan Turing"
+                      id="contact-name"
+                      placeholder="John Smith"
                       required
                       autoComplete="name"
                       value={formState.name}
@@ -166,12 +166,12 @@ export default function ContactSection() {
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label" htmlFor="email">Email Address</label>
+                    <label className="form-label" htmlFor="contact-email">Email Address</label>
                     <input
                       className="form-input"
                       type="email"
-                      id="email"
-                      placeholder="alan@turing.edu"
+                      id="contact-email"
+                      placeholder="john@company.com"
                       required
                       autoComplete="email"
                       value={formState.email}
@@ -181,12 +181,12 @@ export default function ContactSection() {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label" htmlFor="company">Enterprise / Organization</label>
+                  <label className="form-label" htmlFor="contact-company">Company / Organization</label>
                   <input
                     className="form-input"
                     type="text"
-                    id="company"
-                    placeholder="Bletchley Park Corp"
+                    id="contact-company"
+                    placeholder="Acme Corporation"
                     required
                     autoComplete="organization"
                     value={formState.company}
@@ -195,27 +195,28 @@ export default function ContactSection() {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label" htmlFor="subject">Synaptic Vector Pathway</label>
+                  <label className="form-label" htmlFor="contact-subject">How Can We Help?</label>
                   <select
                     className="form-select"
-                    id="subject"
+                    id="contact-subject"
                     value={formState.subject}
                     onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
                   >
                     <option>General Inquiry</option>
-                    <option>Enterprise AI Engineering Partnership</option>
-                    <option>BCI Platform Integration</option>
-                    <option>Emerging Quantum Tech</option>
-                    <option>Scientific Research Collaboration</option>
+                    <option>AI & Automation Solutions</option>
+                    <option>Cloud Infrastructure</option>
+                    <option>Data & Analytics</option>
+                    <option>Strategic Consulting</option>
+                    <option>Partnership Opportunity</option>
                   </select>
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label" htmlFor="message">Transmission Details</label>
+                  <label className="form-label" htmlFor="contact-message">Tell Us More</label>
                   <textarea
                     className="form-textarea"
-                    id="message"
-                    placeholder="Vector parameters, scaling details, architecture specifications..."
+                    id="contact-message"
+                    placeholder="Describe your project, challenges, or goals..."
                     required
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
@@ -223,7 +224,7 @@ export default function ContactSection() {
                 </div>
 
                 <GlassButton variant="neural" className="w-full" style={{ width: '100%', padding: '16px' }}>
-                  Dispatch Synapse Channel
+                  Send Message
                 </GlassButton>
               </form>
             )}

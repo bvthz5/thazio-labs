@@ -47,3 +47,12 @@ __pycache__/
 .venv/
 venv/
 env/
+
+# auto-generated logo assets (regenerated from logo.png via process-logo script)
+public/images/logo_transparent.png
+public/favicon.ico
+public/favicon-16x16.png
+public/favicon-32x32.png
+public/apple-touch-icon.png
+src/app/icon.png
+src/app/apple-icon.png

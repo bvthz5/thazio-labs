@@ -10,9 +10,9 @@ export default function IndustriesSection() {
     <section id="industries" className="industries-section section">
       <div className="container">
         <SectionHeading
-          overline="INDUSTRIES WE TRANSFORM"
-          title="Powering Intelligence&#10;Across Verticals"
-          description="Empowering healthcare leaders, global banking corporations, and municipal infrastructures with self-evolving cognitive systems designed for scalable operations."
+          overline="INDUSTRIES WE SERVE"
+          title="Powering Automation&#10;Across Every Sector"
+          description="We deploy intelligent agent networks across industries where operational complexity meets the need for speed, accuracy, and scale."
           centered
         />
 

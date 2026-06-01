@@ -94,9 +94,9 @@ export default function ServicesSection() {
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <SectionHeading
-          overline="WHAT WE BUILD"
-          title="Intelligent Systems for&#10;Enterprise Evolution"
-          description="We engineer resilient intelligence platforms, customized autonomous agents, and cognitive interfaces that empower global enterprises to lead the future."
+          overline="OUR SERVICES"
+          title="Comprehensive Solutions&#10;For Modern Enterprises"
+          description="From custom software engineering to autonomous AI systems — we deliver end-to-end technology solutions that drive measurable business outcomes."
           centered
         />
 

@@ -103,11 +103,8 @@ function NeuralNetwork() {
   const { positions, linePositions } = useMemo(() => generateSphereNodes(), []);
   const particleTexture = useMemo(() => createParticleTexture(), []);
 
-  // Determine standard responsive x-offset based on viewport width
-  // Shifts sphere to the right on desktop, centers it on mobile
-  const responsiveXOffset = useMemo(() => {
-    return viewport.width > 7 ? viewport.width * 0.18 : 0;
-  }, [viewport.width]);
+  // Center sphere in its container (no offset needed — scene is in its own column now)
+  const responsiveXOffset = 0;
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -297,7 +294,7 @@ export default function NeuralSphereScene() {
   return (
     <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
       <Canvas
-        camera={{ position: [0, 0, 5.5], fov: 50 }}
+        camera={{ position: [0, 0, 4.5], fov: 50 }}
         dpr={[1, 1.5]}
         gl={{ alpha: true, antialias: true }}
       >

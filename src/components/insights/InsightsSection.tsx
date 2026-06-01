@@ -3,14 +3,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import SectionHeading from '../ui/SectionHeading';
-import { INSIGHTS } from '@/lib/constants';
+import { INSIGHTS, INSIGHT_CATEGORIES } from '@/lib/constants';
 
-const categories = ['All', 'Research', 'Case Study'] as const;
+const displayLabels: Record<typeof INSIGHT_CATEGORIES[number], string> = {
+  All: 'All Publications',
+  Newsroom: 'Newsroom',
+  Blog: 'Blog',
+  'Case Study': 'Case Studies',
+  'E-Book': 'E-Books',
+};
 
 export default function InsightsSection() {
-  const [activeTab, setActiveTab] = useState<typeof categories[number]>('All');
+  const [activeTab, setActiveTab] = useState<typeof INSIGHT_CATEGORIES[number]>('All');
 
-  // Filter items matching selected categories
+  // Filter items matching selected category
   const filteredInsights = INSIGHTS.filter(
     (item) => activeTab === 'All' || item.tag === activeTab
   );
@@ -20,19 +26,19 @@ export default function InsightsSection() {
       <div className="container">
         <SectionHeading
           overline="INSIGHTS"
-          title="The Synaptic Stream"
-          description="Explore our latest discoveries in deep learning models, brain-computer interface standards, and advanced automation reports."
+          title="Latest From Thazio"
+          description="Stay updated with our latest news, technical deep-dives, customer success stories, and industry reports."
         />
 
         {/* Tab Selection */}
         <div className="insights-tabs">
-          {categories.map((tab) => (
+          {INSIGHT_CATEGORIES.map((tab) => (
             <button
               key={tab}
               className={`insights-tab ${activeTab === tab ? 'active' : ''}`}
               onClick={() => setActiveTab(tab)}
             >
-              {tab === 'All' ? 'All Publications' : tab === 'Research' ? 'Scientific Research' : 'Case Studies'}
+              {displayLabels[tab]}
             </button>
           ))}
         </div>
