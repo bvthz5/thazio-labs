@@ -51,8 +51,18 @@ export default function Navbar() {
           href="#hero" 
           className="navbar-logo"
           onClick={(e) => handleNavClick(e, '#hero')}
-          style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}
         >
+          <img 
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/logo_transparent.png`} 
+            alt="Thazio Neural Logo" 
+            style={{ 
+              display: 'block', 
+              height: '44px',
+              width: 'auto',
+              objectFit: 'contain', 
+            }}
+          />
           <span style={{ 
             fontFamily: 'var(--font-logo)', 
             fontWeight: 900, 
