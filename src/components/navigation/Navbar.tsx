@@ -4,7 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { NAV_LINKS } from '@/lib/constants';
 
 
-export default function Navbar() {
+interface NavbarProps {
+  active?: boolean;
+}
+
+export default function Navbar({ active = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -44,7 +48,14 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav 
+      className={`navbar ${scrolled ? 'scrolled' : ''}`}
+      style={{
+        opacity: active ? 1 : 0,
+        transform: active ? 'translateY(0)' : 'translateY(-15px)',
+        transition: 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s',
+      }}
+    >
       <div className="navbar-inner">
         {/* Logo */}
         <a 

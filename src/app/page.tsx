@@ -63,10 +63,10 @@ export default function HomePage() {
   const handleIntroComplete = () => {
     // Reveal homepage content smoothly
     setShowContent(true);
-    // Unmount intro overlay strictly after the cross-fade finishes
+    // Unmount intro overlay strictly after the cross-fade finishes (400ms delay + 850ms timeout = 1250ms unmount)
     setTimeout(() => {
       setIntroComplete(true);
-    }, 1200);
+    }, 850);
   };
 
   return (
@@ -78,13 +78,16 @@ export default function HomePage() {
       <div
         style={{
           opacity: showContent ? 1 : 0,
-          transition: 'opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1)',
+          filter: showContent ? 'blur(0px)' : 'blur(20px)',
+          transform: showContent ? 'scale(1)' : 'scale(0.96)',
+          transition: 'opacity 0.8s ease-out, filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
           pointerEvents: showContent ? 'auto' : 'none',
           position: 'relative',
           width: '100%',
+          transformOrigin: 'center 30vh',
         }}
       >
-        <Navbar />
+        <Navbar active={showContent} />
 
         <main>
           {/* Hero Section */}

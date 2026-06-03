@@ -9,14 +9,26 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.2,
+      staggerChildren: 0.08, // Beautiful, rapid staging
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const titleLineVariants: Variants = {
+  hidden: { y: '105%', opacity: 0 },
+  visible: {
+    y: '0%',
+    opacity: 1,
+    transition: {
+      duration: 1.0, // Slow, majestic sweep
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
     },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
+  hidden: { opacity: 0, y: 20, filter: 'blur(6px)' }, // smooth rise for subtitle/buttons
   visible: {
     opacity: 1,
     y: 0,
@@ -28,7 +40,11 @@ const itemVariants: Variants = {
   },
 };
 
-export default function HeroContent() {
+interface HeroContentProps {
+  active?: boolean;
+}
+
+export default function HeroContent({ active = true }: HeroContentProps) {
   const handleScrollTo = (e: React.MouseEvent<HTMLButtonElement & HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     const element = document.getElementById(targetId);
@@ -57,31 +73,37 @@ export default function HeroContent() {
       className="hero-content"
       variants={containerVariants}
       initial="hidden"
-      animate="visible"
+      animate={active ? "visible" : "hidden"}
     >
-      {/* Main Title — 3 lines */}
+      {/* Main Title — 3 lines with overflow-clipping reveal masks */}
       <h1 className="hero-title">
-        <motion.span className="hero-title-line" variants={itemVariants}>
-          THE WORLD&apos;S FIRST
-        </motion.span>
-        <motion.span
-          className="hero-title-line gradient"
-          variants={itemVariants}
-          style={{
-            background: 'var(--gradient-text-neural)',
-            backgroundSize: '300% auto',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            animation: 'shimmer 6s ease infinite',
-            fontWeight: 700,
-          }}
-        >
-          FULLY AUTOMATED
-        </motion.span>
-        <motion.span className="hero-title-line" variants={itemVariants}>
-          COMPANY
-        </motion.span>
+        <div style={{ overflow: 'hidden', paddingBottom: '0.05em' }}>
+          <motion.span className="hero-title-line" variants={titleLineVariants}>
+            THE WORLD&apos;S FIRST
+          </motion.span>
+        </div>
+        <div style={{ overflow: 'hidden', paddingBottom: '0.05em' }}>
+          <motion.span
+            className="hero-title-line gradient"
+            variants={titleLineVariants}
+            style={{
+              background: 'var(--gradient-text-neural)',
+              backgroundSize: '300% auto',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              animation: 'shimmer 6s ease infinite',
+              fontWeight: 700,
+            }}
+          >
+            FULLY AUTOMATED
+          </motion.span>
+        </div>
+        <div style={{ overflow: 'hidden', paddingBottom: '0.05em' }}>
+          <motion.span className="hero-title-line" variants={titleLineVariants}>
+            COMPANY
+          </motion.span>
+        </div>
       </h1>
 
       {/* Subtitle */}
