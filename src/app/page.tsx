@@ -63,10 +63,10 @@ export default function HomePage() {
   const handleIntroComplete = () => {
     // Reveal homepage content smoothly
     setShowContent(true);
-    // Unmount intro overlay strictly after the cross-fade finishes (400ms delay + 850ms timeout = 1250ms unmount)
+    // Unmount intro overlay after the white bloom bridge has fully faded
     setTimeout(() => {
       setIntroComplete(true);
-    }, 850);
+    }, 1200);
   };
 
   return (
@@ -78,9 +78,9 @@ export default function HomePage() {
       <div
         style={{
           opacity: showContent ? 1 : 0,
-          filter: showContent ? 'blur(0px)' : 'blur(20px)',
-          transform: showContent ? 'scale(1)' : 'scale(0.96)',
-          transition: 'opacity 0.8s ease-out, filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+          filter: showContent ? 'blur(0px)' : 'blur(25px)',
+          transform: showContent ? 'scale(1)' : 'scale(1.08)',
+          transition: 'opacity 0.9s ease-out, filter 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)',
           pointerEvents: showContent ? 'auto' : 'none',
           position: 'relative',
           width: '100%',
