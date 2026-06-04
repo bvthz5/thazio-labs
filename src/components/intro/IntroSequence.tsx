@@ -53,10 +53,16 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
       setFlareState('buildup');
       setGlowState('buildup');
     } else if (phase === 'splitting') {
-      setShowWhiteFlash(true);
       setShowRefraction(true);
       setFlareState('burst');
       setGlowState('burst');
+      
+      // Delay the Lens Bloom to allow slow-motion letter scattering
+      const bloomTimer = setTimeout(() => {
+        setShowWhiteFlash(true);
+      }, 600);
+      
+      return () => clearTimeout(bloomTimer);
     } else if (phase === 'complete') {
       // Keep state clean
     } else {
@@ -149,20 +155,20 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
       // Begin audio fade
       fadeVolume(1200);
 
-      // After 600ms of subtle energy buildup, trigger the fast white-out
+      // After 500ms of subtle energy buildup, trigger the slow-motion explosion
       setTimeout(() => {
         setPhase('splitting');
-      }, 600);
+      }, 500);
       
-      // Reveal homepage content when the white curtain reaches maximum opacity
+      // Reveal homepage content when the delayed Lens Bloom covers the screen
       setTimeout(() => {
         onComplete();
-      }, 800);
+      }, 1200);
 
-      // Complete the intro phase — white curtain fades to reveal homepage
+      // Complete the intro phase — Lens Bloom finishes fading
       setTimeout(() => {
         setPhase('complete');
-      }, 1900);
+      }, 1600);
     }
   }, [onComplete, fadeVolume]);
 
@@ -381,7 +387,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
             // Particles intensify during dissolve buildup
             p.alpha = p.maxAlpha * (0.6 + Math.sin(time * 0.08 + p.pulsePhase!) * 0.4);
           } else if (phaseRef.current === 'splitting') {
-            p.alpha = Math.max(0, p.alpha - 0.10); // Ultra-fast fade during burst (160ms)
+            p.alpha = Math.max(0, p.alpha - 0.04); // Slower fade to drift during slow-motion blast
           } else {
             p.alpha = p.maxAlpha * (0.35 + Math.sin(time * p.pulseSpeed! + p.pulsePhase!) * 0.65);
           }
@@ -458,7 +464,25 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
       {phase !== 'complete' && (
         <motion.div
           className="intro-overlay"
-          initial={{ opacity: 1 }}
+          initial={{ opacity: 1, backgroundColor: '#000000' }}
+          animate={
+            phase === 'splitting'
+              ? {
+                  backgroundColor: ['#000000', '#000000', 'rgba(0,0,0,0)'],
+                }
+              : { backgroundColor: '#000000' }
+          }
+          transition={
+            phase === 'splitting'
+              ? {
+                  backgroundColor: {
+                    times: [0, 0.54, 1],
+                    duration: 1.1,
+                    ease: 'easeOut',
+                  }
+                }
+              : undefined
+          }
           exit={{ opacity: 0, transition: { duration: 0.3 } }}
           style={{
             position: 'fixed',
@@ -467,7 +491,6 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
             right: 0,
             bottom: 0,
             zIndex: 99999,
-            background: '#000000',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -485,7 +508,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                 opacity: [0, 1, 1, 0]
               }}
               transition={{
-                duration: 1.3,
+                duration: 0.5, // Blinding speed flash reveal
                 times: [0, 0.2, 0.45, 1],
                 ease: [0.16, 1, 0.3, 1]
               }}
@@ -533,7 +556,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                     opacity: 0,
                     scale: 1.03,
                     filter: 'blur(10px) brightness(0.1)',
-                    transition: { duration: 0.35, ease: 'easeInOut' }
+                    transition: { duration: 0.3, ease: 'easeInOut' }
                   }
                 : phase === 'splitting'
                 ? {
@@ -922,14 +945,14 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                             x: { repeat: Infinity, duration: 0.15, ease: 'linear' },
                             y: { repeat: Infinity, duration: 0.12, ease: 'linear' },
                             rotateZ: { repeat: Infinity, duration: 0.18, ease: 'linear' },
-                            scale: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-                            filter: { duration: 0.6 },
-                            textShadow: { duration: 0.6 }
+                            scale: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+                            filter: { duration: 0.5 },
+                            textShadow: { duration: 0.5 }
                           }
                         }
                       : phase === 'splitting'
                       ? {
-                          // 3D explosive dispersion: outward in X/Y, forward/backward in Z, spinning wildly in 3D, heavy lens blur
+                          // 3D explosive dispersion: outward in X/Y, forward/backward in Z, spinning wildly in 3D
                           x: `${(index - 2.5) * 35}vw`,
                           y: `${(index % 2 === 0 ? -18 : 18)}vh`,
                           z: 800,
@@ -937,13 +960,29 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                           rotateX: (index - 2.5) * 120,
                           rotateY: (index % 2 === 0 ? -180 : 180),
                           rotateZ: (index - 2.5) * 60,
-                          opacity: 0,
-                          filter: 'blur(20px)',
+                          opacity: [1, 1, 0],
+                          filter: ['blur(0px)', 'blur(0px)', 'blur(15px)'],
                           textShadow: '0 0 80px rgba(255, 255, 255, 1)',
                           transition: {
-                            duration: 0.85,
-                            ease: [0.1, 0.8, 0.1, 1], // cinematic decel curve
-                            delay: Math.abs(index - 2.5) * 0.04 // center-outwards stagger delay
+                            x: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                            y: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                            z: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                            scale: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                            rotateX: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                            rotateY: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                            rotateZ: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                            opacity: {
+                              times: [0, 0.65, 1], // Stays fully opaque for 65% of 1.4s (910ms), then fades
+                              duration: 1.4,
+                              ease: 'easeOut',
+                              delay: Math.abs(index - 2.5) * 0.04
+                            },
+                            filter: {
+                              times: [0, 0.65, 1], // Stays sharp, blurs at the end
+                              duration: 1.4,
+                              ease: 'easeOut',
+                              delay: Math.abs(index - 2.5) * 0.04
+                            }
                           }
                         }
                       : phase === 'breathing'

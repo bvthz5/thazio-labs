@@ -66,7 +66,7 @@ export default function HomePage() {
     // Unmount intro overlay after the white bloom bridge has fully faded
     setTimeout(() => {
       setIntroComplete(true);
-    }, 1200);
+    }, 700);
   };
 
   return (
