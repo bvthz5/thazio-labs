@@ -31,7 +31,6 @@ export default function Navbar({ active = true }: NavbarProps) {
           const isDark =
             section.classList.contains('section-dark') ||
             section.id === 'hero' ||
-            section.classList.contains('stats-bar') ||
             section.classList.contains('footer') ||
             section.getAttribute('data-navbar-theme') === 'dark';
           activeTheme = isDark ? 'dark' : 'light';
