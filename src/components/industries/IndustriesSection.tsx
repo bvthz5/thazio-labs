@@ -7,13 +7,14 @@ import { INDUSTRIES } from '@/lib/constants';
 
 export default function IndustriesSection() {
   return (
-    <section id="industries" className="industries-section section">
+    <section id="industries" className="industries-section section section-dark">
       <div className="container">
         <SectionHeading
           overline="INDUSTRIES WE SERVE"
           title="Powering Automation&#10;Across Every Sector"
           description="We deploy intelligent agent networks across industries where operational complexity meets the need for speed, accuracy, and scale."
           centered
+          light
         />
 
         <div className="industries-grid">

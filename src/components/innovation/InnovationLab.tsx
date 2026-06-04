@@ -23,7 +23,7 @@ export default function InnovationLab() {
   };
 
   return (
-    <section id="company" className="section" style={{ background: 'var(--gradient-section)' }}>
+    <section id="company" className="section section-dark" style={{ background: 'var(--gradient-dark-section)' }}>
       <div className="container">
 
         {/* ═══════ About Us ═══════ */}
@@ -31,6 +31,7 @@ export default function InnovationLab() {
           overline="ABOUT THAZIO"
           title={'Building the Future\nOf Autonomous Enterprise'}
           description="We're not building another SaaS tool. We're building the operating system for companies that run themselves."
+          light
         />
 
         {/* Mission & Vision */}
@@ -48,7 +49,7 @@ export default function InnovationLab() {
           ] as const).map((item, i) => (
             <motion.div
               key={item.label}
-              className="glass-card"
+              className="glass-card-dark"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
@@ -74,13 +75,13 @@ export default function InnovationLab() {
                   fontWeight: 600,
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
-                  color: 'var(--color-electric-blue)',
+                  color: 'var(--color-electric-blue-light)',
                   marginBottom: 'var(--space-4)',
                 }}
               >
                 {item.label}
               </h5>
-              <p style={{ fontSize: 'var(--text-base)', lineHeight: 1.8 }}>{item.text}</p>
+              <p style={{ fontSize: 'var(--text-base)', lineHeight: 1.8, color: 'rgba(255, 255, 255, 0.7)' }}>{item.text}</p>
             </motion.div>
           ))}
         </div>
@@ -90,7 +91,7 @@ export default function InnovationLab() {
           {COMPANY_INFO.values.map((value, i) => (
             <motion.div
               key={value.title}
-              className="glass-card"
+              className="glass-card-dark"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
@@ -112,10 +113,10 @@ export default function InnovationLab() {
               >
                 {valueIcons[i]}
               </div>
-              <h5 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-3)' }}>
+              <h5 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-3)', color: 'var(--color-white)' }}>
                 {value.title}
               </h5>
-              <p style={{ fontSize: 'var(--text-sm)', lineHeight: 1.7 }}>{value.description}</p>
+              <p style={{ fontSize: 'var(--text-sm)', lineHeight: 1.7, color: 'rgba(255, 255, 255, 0.6)' }}>{value.description}</p>
             </motion.div>
           ))}
         </div>
@@ -130,18 +131,18 @@ export default function InnovationLab() {
         >
           <div
             className="overline"
-            style={{ justifyContent: 'center' }}
+            style={{ justifyContent: 'center', color: 'var(--color-electric-blue-light)' }}
           >
             TEAM
           </div>
-          <h2 style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}>Leadership</h2>
+          <h2 style={{ textAlign: 'center', marginBottom: 'var(--space-6)', color: 'var(--color-white)' }}>Leadership</h2>
           <p
             style={{
               textAlign: 'center',
               maxWidth: '520px',
               margin: '0 auto',
               fontSize: 'var(--text-lg)',
-              color: 'var(--color-slate)',
+              color: 'rgba(255, 255, 255, 0.6)',
             }}
           >
             The people building the autonomous enterprise.
@@ -152,7 +153,7 @@ export default function InnovationLab() {
           {LEADERSHIP.map((person, i) => (
             <motion.div
               key={person.name}
-              className="glass-card"
+              className="glass-card-dark"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
@@ -168,7 +169,7 @@ export default function InnovationLab() {
                   background: portraitGradients[i % portraitGradients.length],
                   margin: '0 auto var(--space-6)',
                   overflow: 'hidden',
-                  boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.25)',
                 }}
               >
                 <img
@@ -182,20 +183,20 @@ export default function InnovationLab() {
                 />
               </div>
 
-              <h4 style={{ fontSize: 'var(--text-xl)', marginBottom: 'var(--space-1)' }}>
+              <h4 style={{ fontSize: 'var(--text-xl)', marginBottom: 'var(--space-1)', color: 'var(--color-white)' }}>
                 {person.name}
               </h4>
               <p
                 style={{
                   fontSize: 'var(--text-sm)',
                   fontWeight: 600,
-                  color: 'var(--color-electric-blue)',
+                  color: 'var(--color-electric-blue-light)',
                   marginBottom: 'var(--space-4)',
                 }}
               >
                 {person.role}
               </p>
-              <p style={{ fontSize: 'var(--text-sm)', lineHeight: 1.7, color: 'var(--color-slate)' }}>
+              <p style={{ fontSize: 'var(--text-sm)', lineHeight: 1.7, color: 'rgba(255, 255, 255, 0.6)' }}>
                 {person.bio}
               </p>
             </motion.div>
@@ -210,10 +211,10 @@ export default function InnovationLab() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           style={{ marginBottom: 'var(--space-12)' }}
         >
-          <div className="overline" style={{ justifyContent: 'center' }}>
+          <div className="overline" style={{ justifyContent: 'center', color: 'var(--color-electric-blue-light)' }}>
             SUPPORT
           </div>
-          <h2 style={{ textAlign: 'center' }}>Frequently Asked Questions</h2>
+          <h2 style={{ textAlign: 'center', color: 'var(--color-white)' }}>Frequently Asked Questions</h2>
         </motion.div>
 
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
@@ -228,7 +229,7 @@ export default function InnovationLab() {
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.4, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 style={{
-                  borderBottom: '1px solid var(--color-platinum)',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                 }}
               >
                 <button
@@ -246,7 +247,7 @@ export default function InnovationLab() {
                     fontFamily: 'var(--font-heading)',
                     fontSize: 'var(--text-lg)',
                     fontWeight: 600,
-                    color: 'var(--color-obsidian)',
+                    color: 'var(--color-white)',
                     letterSpacing: '-0.01em',
                     transition: 'color var(--transition-fast)',
                   }}
@@ -261,9 +262,9 @@ export default function InnovationLab() {
                       height: '28px',
                       borderRadius: '50%',
                       background: isOpen
-                        ? 'var(--color-obsidian)'
-                        : 'var(--color-silver)',
-                      color: isOpen ? 'var(--color-white)' : 'var(--color-slate)',
+                        ? 'var(--color-white)'
+                        : 'rgba(255, 255, 255, 0.08)',
+                      color: isOpen ? 'var(--color-obsidian)' : 'rgba(255, 255, 255, 0.6)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -290,7 +291,7 @@ export default function InnovationLab() {
                           paddingBottom: 'var(--space-6)',
                           fontSize: 'var(--text-base)',
                           lineHeight: 1.8,
-                          color: 'var(--color-slate)',
+                          color: 'rgba(255, 255, 255, 0.6)',
                           maxWidth: '680px',
                         }}
                       >

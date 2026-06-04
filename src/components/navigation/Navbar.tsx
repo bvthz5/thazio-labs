@@ -10,14 +10,37 @@ interface NavbarProps {
 
 export default function Navbar({ active = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setScrolled(currentScrollY > 10);
+
+      // Dynamic theme matching based on active overlapping section
+      const sections = document.querySelectorAll('section, footer');
+      const navHeight = 80;
+      let activeTheme: 'dark' | 'light' = 'dark'; // default to dark (hero)
+
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        const rect = section.getBoundingClientRect();
+        // If the section overlaps the navbar's screen position
+        if (rect.top <= navHeight && rect.bottom > 0) {
+          const isDark =
+            section.classList.contains('section-dark') ||
+            section.id === 'hero' ||
+            section.classList.contains('stats-bar') ||
+            section.classList.contains('footer') ||
+            section.getAttribute('data-navbar-theme') === 'dark';
+          activeTheme = isDark ? 'dark' : 'light';
+        }
+      }
+      setTheme(activeTheme);
     };
 
+    handleScroll(); // Initialize on mount
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -50,7 +73,7 @@ export default function Navbar({ active = true }: NavbarProps) {
 
   return (
     <nav 
-      className={`navbar ${scrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`}
+      className={`navbar theme-${theme} ${scrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`}
       style={{
         opacity: active ? 1 : 0,
         transform: active ? 'none' : 'translateY(-20px)',
@@ -144,7 +167,7 @@ export default function Navbar({ active = true }: NavbarProps) {
         left: 0,
         width: '100%',
         height: 'calc(100vh - var(--nav-height))',
-        background: 'var(--glass-bg-strong)',
+        background: theme === 'dark' ? 'rgba(10, 14, 26, 0.96)' : 'var(--glass-bg-strong)',
         backdropFilter: 'var(--glass-blur-strong)',
         WebkitBackdropFilter: 'var(--glass-blur-strong)',
         zIndex: 999,
@@ -159,7 +182,7 @@ export default function Navbar({ active = true }: NavbarProps) {
         pointerEvents: mobileMenuOpen ? 'all' : 'none',
         transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-20px)',
         transition: 'all 0.4s var(--ease-out-expo)',
-        borderTop: '1px solid rgba(0, 0, 0, 0.05)',
+        borderTop: theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(0, 0, 0, 0.05)',
       }}>
         {NAV_LINKS.map((link) => (
           <a
@@ -170,7 +193,7 @@ export default function Navbar({ active = true }: NavbarProps) {
               fontFamily: 'var(--font-heading)',
               fontSize: 'var(--text-xl)',
               fontWeight: 600,
-              color: 'var(--color-obsidian)',
+              color: theme === 'dark' ? 'var(--color-white)' : 'var(--color-obsidian)',
             }}
           >
             {link.label}
