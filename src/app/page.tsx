@@ -74,6 +74,8 @@ export default function HomePage() {
       {/* Cinematic Intro Sequence (always mounts on reload) */}
       {!introComplete && <IntroSequence onComplete={handleIntroComplete} />}
 
+      <Navbar active={showContent} />
+
       {/* Main Content */}
       <div
         style={{
@@ -87,8 +89,6 @@ export default function HomePage() {
           transformOrigin: 'center 30vh',
         }}
       >
-        <Navbar active={showContent} />
-
         <main>
           {/* Hero Section */}
           <HeroSection active={showContent} />
