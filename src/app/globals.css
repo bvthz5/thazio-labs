@@ -789,11 +789,9 @@ img {
   background-size: cover;
   background-position: center;
   mix-blend-mode: screen;
-  opacity: 0.05;
+  opacity: 0.15;
   pointer-events: none;
   z-index: 3;
-  clip-path: polygon(0 80px, 100% 80px, 100% 100%, 0 100%);
-  -webkit-clip-path: polygon(0 80px, 100% 80px, 100% 100%, 0 100%);
 }
 
 .hero-map-glow {
@@ -810,8 +808,6 @@ img {
   pointer-events: none;
   z-index: 4;
   transition: opacity 0.5s ease;
-  clip-path: polygon(0 80px, 100% 80px, 100% 100%, 0 100%);
-  -webkit-clip-path: polygon(0 80px, 100% 80px, 100% 100%, 0 100%);
 }
 
 .hero-inner {

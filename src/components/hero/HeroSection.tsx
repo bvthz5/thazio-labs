@@ -158,7 +158,7 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
         }}
       />
       
-      <div className="container" style={{ position: 'relative' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 5 }}>
         <div className="hero-inner">
           <HeroContent active={active} />
         </div>
