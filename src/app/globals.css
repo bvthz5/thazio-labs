@@ -918,6 +918,7 @@ img {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: shimmer 5s ease-in-out infinite;
+  text-shadow: none !important;
 }
 
 .hero-subtitle {
