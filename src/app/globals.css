@@ -624,7 +624,12 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--transition-base);
+  transition: 
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
   background: rgba(10, 14, 26, 0.3);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
@@ -642,9 +647,9 @@ img {
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 10px 30px -10px rgba(0, 102, 255, 0.05);
 }

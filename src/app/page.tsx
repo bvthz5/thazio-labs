@@ -80,8 +80,8 @@ export default function HomePage() {
       <div
         style={{
           opacity: showContent ? 1 : 0,
-          filter: showContent ? 'blur(0px)' : 'blur(25px)',
-          transform: showContent ? 'scale(1)' : 'scale(1.08)',
+          filter: showContent ? 'none' : 'blur(25px)',
+          transform: showContent ? 'none' : 'scale(1.08)',
           transition: 'opacity 0.9s ease-out, filter 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)',
           pointerEvents: showContent ? 'auto' : 'none',
           position: 'relative',

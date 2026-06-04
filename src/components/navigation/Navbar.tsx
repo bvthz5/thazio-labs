@@ -56,7 +56,6 @@ export default function Navbar({ active = true }: NavbarProps) {
         transform: active ? 'translateY(0)' : 'translateY(-20px)',
         left: 0,
         width: '100%',
-        transition: 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         pointerEvents: active ? 'auto' : 'none',
       }}
     >
