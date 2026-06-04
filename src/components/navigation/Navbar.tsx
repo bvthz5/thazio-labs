@@ -11,44 +11,16 @@ interface NavbarProps {
 export default function Navbar({ active = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // Keep it visible if mobile menu is open
-      if (mobileMenuOpen) {
-        setLastScrollY(currentScrollY);
-        return;
-      }
-
-      // If at the absolute top, always keep it visible and non-scrolled
-      if (currentScrollY <= 10) {
-        setVisible(true);
-        setScrolled(false);
-        setLastScrollY(currentScrollY);
-        return;
-      }
-
-      setScrolled(true);
-
-      // Determine scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        // Scrolling down -> hide navbar
-        setVisible(false);
-      } else {
-        // Scrolling up -> show navbar
-        setVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
+      setScrolled(currentScrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, mobileMenuOpen]);
+  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -80,16 +52,12 @@ export default function Navbar({ active = true }: NavbarProps) {
     <nav 
       className={`navbar ${scrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`}
       style={{
-        opacity: active ? (mobileMenuOpen ? 1 : (visible ? 1 : 0)) : 0,
-        transform: active 
-          ? (mobileMenuOpen 
-              ? 'translateY(0)' 
-              : (visible ? 'translateY(0)' : 'translateY(-100px)'))
-          : 'translateY(-20px)',
+        opacity: active ? 1 : 0,
+        transform: active ? 'translateY(0)' : 'translateY(-20px)',
         left: 0,
         width: '100%',
         transition: 'opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-        pointerEvents: active && (visible || mobileMenuOpen) ? 'auto' : 'none',
+        pointerEvents: active ? 'auto' : 'none',
       }}
     >
       <div className="navbar-inner">
