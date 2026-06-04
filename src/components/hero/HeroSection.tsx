@@ -102,12 +102,18 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
       style={{ position: 'relative', overflow: 'hidden' }}
     >
       {/* Base Dotted World Map Background (faint) */}
-      <div className="hero-map-bg" />
+      <div 
+        className="hero-map-bg" 
+        style={{
+          backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/world_map_dots.png')`
+        }}
+      />
 
       {/* Interactive Glowing Spotlight Map Overlay (follows cursor) */}
       <div 
         className="hero-map-glow"
         style={{
+          backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/world_map_dots.png')`,
           WebkitMaskImage: `radial-gradient(circle 220px at ${mouseCoords.x}px ${mouseCoords.y}px, black 20%, transparent 100%)`,
           maskImage: `radial-gradient(circle 220px at ${mouseCoords.x}px ${mouseCoords.y}px, black 20%, transparent 100%)`,
           opacity: isHovered ? 0.85 : 0,
