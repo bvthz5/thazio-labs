@@ -630,10 +630,11 @@ img {
     background var(--transition-base),
     border-color var(--transition-base),
     box-shadow var(--transition-base);
-  background: rgba(10, 14, 26, 0.35);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  /* Dark frosted glass — opaque enough to read text clearly even if backdrop-filter fails */
+  background: rgba(10, 14, 26, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
 }
 
 .navbar-inner {
@@ -644,18 +645,23 @@ img {
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  position: relative;
+  z-index: 2; /* Ensure navbar text is always sharp and above any blur layers */
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  /* Light frosted glass — semi-opaque white with strong blur */
+  background: rgba(245, 247, 252, 0.78);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 .navbar.menu-open {
-  background: var(--glass-bg-strong);
+  background: rgba(245, 247, 252, 0.95);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: var(--shadow-sm);
 }
