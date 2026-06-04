@@ -116,7 +116,7 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
           backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/world_map_dots.png')`,
           WebkitMaskImage: `radial-gradient(circle 220px at ${mouseCoords.x}px ${mouseCoords.y}px, black 20%, transparent 100%)`,
           maskImage: `radial-gradient(circle 220px at ${mouseCoords.x}px ${mouseCoords.y}px, black 20%, transparent 100%)`,
-          opacity: isHovered ? 0.85 : 0,
+          opacity: isHovered ? 0.28 : 0,
         }}
       />
 
