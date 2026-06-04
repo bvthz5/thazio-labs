@@ -53,7 +53,7 @@ export default function Navbar({ active = true }: NavbarProps) {
       className={`navbar ${scrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`}
       style={{
         opacity: active ? 1 : 0,
-        transform: active ? 'translateY(0)' : 'translateY(-20px)',
+        transform: active ? 'none' : 'translateY(-20px)',
         left: 0,
         width: '100%',
         pointerEvents: active ? 'auto' : 'none',
