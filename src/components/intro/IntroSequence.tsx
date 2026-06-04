@@ -315,6 +315,43 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
       const centerX = width / 2;
       const centerY = height / 2;
 
+      // Draw neural network connections (constellation lines) during active phases for continuity
+      if (phaseRef.current !== 'void' && phaseRef.current !== 'complete') {
+        const maxDist = isMobile ? 85 : 135;
+        for (let i = 0; i < particles.length; i++) {
+          const pi = particles[i];
+          if (pi.type === 'shooting_star' || pi.alpha <= 0.05) continue;
+          
+          for (let j = i + 1; j < particles.length; j++) {
+            const pj = particles[j];
+            if (pj.type === 'shooting_star' || pj.alpha <= 0.05) continue;
+            
+            const dx = pi.x - pj.x;
+            const dy = pi.y - pj.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist < maxDist) {
+              // Smoothly fade out lines as distance increases, and scale with particle alphas
+              let lineAlpha = (1 - dist / maxDist) * 0.32;
+              lineAlpha *= Math.min(pi.alpha, pj.alpha);
+              
+              if (lineAlpha > 0.01) {
+                ctx.beginPath();
+                ctx.moveTo(pi.x, pi.y);
+                ctx.lineTo(pj.x, pj.y);
+                
+                // Color mapping: electric blue, violet, or pink based on particle hues
+                const isBlue = (pi.hue === 205 || pj.hue === 205);
+                const color = isBlue ? '0, 212, 255' : '123, 47, 190';
+                ctx.strokeStyle = `rgba(${color}, ${lineAlpha})`;
+                ctx.lineWidth = isMobile ? 0.65 : 0.95;
+                ctx.stroke();
+              }
+            }
+          }
+        }
+      }
+
       particles.forEach((p, idx) => {
         if (p.type === 'shooting_star') {
           p.trail!.push({ x: p.x, y: p.y });
@@ -608,9 +645,33 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
               height: '100%',
               zIndex: 4,
               pointerEvents: 'none',
-              opacity: (phase === 'splitting' || phase === 'dissolve') ? 0 : 0.85,
+              opacity: phase === 'complete' ? 0 : 0.85,
               transition: 'opacity 0.3s ease-out',
             }}
+          />
+
+          {/* Dotted World Map Background (fades in during dissolve/splitting for seamless homepage continuity) */}
+          <motion.div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/world_map_dots.png')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              mixBlendMode: 'screen',
+              pointerEvents: 'none',
+              zIndex: 3,
+            }}
+            initial={{ opacity: 0 }}
+            animate={
+              (phase === 'dissolve' || phase === 'splitting')
+                ? { opacity: 0.15 }
+                : { opacity: 0 }
+            }
+            transition={{ duration: 0.9, ease: 'easeOut' }}
           />
 
           {/* ─── Center Energy Core (glowing orb) ─── */}
@@ -654,233 +715,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
             />
           )}
 
-          {/* ─── Rotating Thin Conic-Gradient Ring ─── */}
-          {phase !== 'void' && phase !== 'complete' && (
-            <motion.div
-              className="gradient-ring-outer"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={
-                phase === 'dissolve'
-                  ? {
-                      opacity: 0.5,
-                      scale: 0.8,
-                      rotate: 720,
-                      transition: {
-                        duration: 0.6,
-                        ease: [0.16, 1, 0.3, 1]
-                      }
-                    }
-                  : phase === 'splitting'
-                  ? {
-                      opacity: 0,
-                      scale: 1.0,
-                      rotate: 720,
-                      transition: { duration: 0.05, ease: 'easeOut' }
-                    }
-                  : phase === 'ignition'
-                  ? { opacity: [0, 0.25, 0.15], scale: 1 }
-                  : phase === 'breathing'
-                  ? {
-                      opacity: 0.15,
-                      scale: 1,
-                      rotate: 360,
-                      transition: {
-                        opacity: { duration: 1 },
-                        rotate: { repeat: Infinity, duration: 25, ease: 'linear' }
-                      }
-                    }
-                  : { opacity: 0.15, scale: 1 }
-              }
-              style={{
-                position: 'absolute',
-                width: isMobile ? 290 : 500,
-                height: isMobile ? 290 : 500,
-                borderRadius: '50%',
-                zIndex: 4,
-                pointerEvents: 'none',
-                mixBlendMode: 'screen',
-              }}
-            >
-              <div className="gradient-ring-inner" />
-            </motion.div>
-          )}
 
-          {/* ─── Volumetric Radial Light Rays (8 slow-rotating rays) ─── */}
-          {phase !== 'void' && phase !== 'complete' && (
-            <motion.div
-              className="radial-ray-container"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={
-                phase === 'dissolve'
-                  ? {
-                      opacity: 0.7,
-                      scale: 0.9,
-                      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-                    }
-                  : phase === 'splitting'
-                  ? {
-                      opacity: 0,
-                      scale: 1.0,
-                      transition: { duration: 0.05, ease: 'easeOut' }
-                    }
-                  : phase === 'ignition'
-                  ? { opacity: [0, 0.5, 0.35], scale: 1 }
-                  : phase === 'breathing'
-                  ? {
-                      opacity: [0.35, 0.5, 0.35],
-                      scale: [1, 1.05, 1],
-                      transition: { repeat: Infinity, duration: 6, ease: 'easeInOut' }
-                    }
-                  : { opacity: 0.35, scale: 1 }
-              }
-              style={{
-                position: 'absolute',
-                width: isMobile ? 360 : 600,
-                height: isMobile ? 360 : 600,
-                zIndex: 3,
-                pointerEvents: 'none',
-                mixBlendMode: 'screen',
-              }}
-            >
-              <motion.div
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  position: 'relative',
-                }}
-                animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 45, ease: 'linear' }}
-              >
-                {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, idx) => (
-                  <div
-                    key={idx}
-                    className="radial-ray"
-                    style={{
-                      '--ray-angle': `${angle}deg`,
-                      height: isMobile ? '200px' : '350px',
-                    } as React.CSSProperties}
-                  />
-                ))}
-              </motion.div>
-            </motion.div>
-          )}
-
-          {/* Center Energy Shockwave Ring */}
-          {phase !== 'void' && phase !== 'complete' && (
-            <motion.div
-              style={{
-                position: 'absolute',
-                width: isMobile ? 260 : 380,
-                height: isMobile ? 260 : 380,
-                borderRadius: '50%',
-                border: '1.5px solid rgba(0, 212, 255, 0.5)',
-                boxShadow: '0 0 15px rgba(0, 212, 255, 0.35), inset 0 0 15px rgba(0, 212, 255, 0.35)',
-                zIndex: 4,
-                pointerEvents: 'none',
-                mixBlendMode: 'screen',
-              }}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={
-                phase === 'ignition'
-                  ? { opacity: [0, 0.8, 0], scale: [0, 1.6], transition: { duration: 1.0, ease: 'easeOut', delay: 0.15 } }
-                  : { opacity: 0, scale: 0 }
-              }
-            />
-          )}
-
-          {/* Floating Geometric SVG Accents */}
-          {phase !== 'void' && phase !== 'complete' && (
-            <motion.div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                zIndex: 4,
-                pointerEvents: 'none',
-              }}
-              initial={{ opacity: 0 }}
-              animate={
-                phase === 'splitting' || phase === 'dissolve'
-                  ? { opacity: 0, transition: { duration: 0.25 } }
-                  : phase === 'breathing'
-                  ? { opacity: 1 }
-                  : { opacity: 0 }
-              }
-              transition={{ duration: 1.8 }}
-            >
-              {/* Orbiting dot 1 */}
-              <motion.div
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  width: 6,
-                  height: 6,
-                  borderRadius: '50%',
-                  background: '#00d4ff',
-                  boxShadow: '0 0 10px #00d4ff',
-                }}
-                animate={{
-                  x: [160 * Math.cos(0), 160 * Math.cos(Math.PI * 2)],
-                  y: [80 * Math.sin(0), 80 * Math.sin(Math.PI * 2)],
-                }}
-                transition={{
-                  x: { repeat: Infinity, duration: 9, ease: 'linear' },
-                  y: { repeat: Infinity, duration: 9, ease: 'linear' },
-                }}
-              />
-              {/* Orbiting dot 2 */}
-              <motion.div
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  width: 4,
-                  height: 4,
-                  borderRadius: '50%',
-                  background: '#ff007f',
-                  boxShadow: '0 0 10px #ff007f',
-                }}
-                animate={{
-                  x: [-190 * Math.cos(0), -190 * Math.cos(Math.PI * 2)],
-                  y: [100 * Math.sin(0), 100 * Math.sin(Math.PI * 2)],
-                }}
-                transition={{
-                  x: { repeat: Infinity, duration: 12, ease: 'linear' },
-                  y: { repeat: Infinity, duration: 12, ease: 'linear' },
-                }}
-              />
-              {/* Sci-Fi Hexagon SVG Outline */}
-              <motion.svg
-                viewBox="0 0 100 100"
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  width: isMobile ? 320 : 540,
-                  height: isMobile ? 320 : 540,
-                  transform: 'translate(-50%, -50%)',
-                  opacity: 0.08,
-                }}
-                animate={{ rotate: 360 }}
-                transition={{ repeat: Infinity, duration: 35, ease: 'linear' }}
-              >
-                <polygon
-                  points="50,5 95,25 95,75 50,95 5,75 5,25"
-                  fill="none"
-                  stroke="url(#hexGrad)"
-                  strokeWidth="0.5"
-                  strokeDasharray="4 8"
-                />
-                <defs>
-                  <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#00d4ff" />
-                    <stop offset="50%" stopColor="#7b2fbe" />
-                    <stop offset="100%" stopColor="#ff007f" />
-                  </linearGradient>
-                </defs>
-              </motion.svg>
-            </motion.div>
-          )}
 
           <div
             style={{
