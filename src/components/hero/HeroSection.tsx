@@ -55,6 +55,40 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
     setIsHovered(false);
   };
 
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (typeof window === 'undefined' || e.touches.length === 0) return;
+    
+    // Get touch coordinates relative to the hero section element
+    const rect = e.currentTarget.getBoundingClientRect();
+    const touch = e.touches[0];
+    const relativeX = touch.clientX - rect.left;
+    const relativeY = touch.clientY - rect.top;
+    
+    setMouseCoords({ x: relativeX, y: relativeY });
+    setIsHovered(true);
+
+    const { clientX, clientY } = touch;
+    const { innerWidth, innerHeight } = window;
+    
+    // Normalize coordinates (-0.5 to 0.5)
+    const normalizedX = (clientX / innerWidth) - 0.5;
+    const normalizedY = (clientY / innerHeight) - 0.5;
+    
+    mouseX.set(normalizedX);
+    mouseY.set(normalizedY);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setIsHovered(true);
+    handleTouchMove(e);
+  };
+
+  const handleTouchEnd = () => {
+    setIsHovered(false);
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   return (
     <section 
       id="hero" 
@@ -62,6 +96,9 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={() => setIsHovered(true)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       style={{ position: 'relative', overflow: 'hidden' }}
     >
       {/* Base Dotted World Map Background (faint) */}
@@ -111,52 +148,13 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
           height: '100%',
           backgroundImage: 'radial-gradient(circle at 75% 30%, rgba(0, 102, 255, 0.07), transparent 60%), radial-gradient(circle at 25% 70%, rgba(123, 47, 190, 0.04), transparent 60%)',
           pointerEvents: 'none',
-          zIndex: 0,
+          zIndex: 1,
         }}
       />
       
-      <div className="container" style={{ position: 'relative', zIndex: 3 }}>
-        <div className="hero-grid">
-          <div className="hero-left">
-            <HeroContent active={active} />
-          </div>
-          <div className="hero-right">
-            <motion.div 
-              className="hero-image-wrapper"
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={active ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.95 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-            >
-              <div className="hero-image-glow" />
-              <motion.div 
-                className="hero-image-container"
-                style={{
-                  x,
-                  y,
-                  rotateX,
-                  rotateY,
-                }}
-              >
-                <motion.div
-                  style={{ width: '100%', height: '100%' }}
-                  animate={{
-                    y: [0, -10, 0],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <img 
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/hero_network.png`} 
-                    alt="Futuristic Neural AI Network" 
-                    className="hero-image"
-                  />
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          </div>
+      <div className="container" style={{ position: 'relative' }}>
+        <div className="hero-inner">
+          <HeroContent active={active} />
         </div>
       </div>
     </section>

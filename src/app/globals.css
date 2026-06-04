@@ -792,7 +792,7 @@ img {
   mix-blend-mode: screen;
   opacity: 0.05;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3;
   clip-path: polygon(0 80px, 100% 80px, 100% 100%, 0 100%);
   -webkit-clip-path: polygon(0 80px, 100% 80px, 100% 100%, 0 100%);
 }
@@ -810,7 +810,7 @@ img {
   opacity: 0;
   filter: drop-shadow(0 0 6px #0066ff) drop-shadow(0 0 12px #7b2fbe);
   pointer-events: none;
-  z-index: 2;
+  z-index: 4;
   transition: opacity 0.5s ease;
   clip-path: polygon(0 80px, 100% 80px, 100% 100%, 0 100%);
   -webkit-clip-path: polygon(0 80px, 100% 80px, 100% 100%, 0 100%);
@@ -826,6 +826,14 @@ img {
   max-width: 900px;
   margin: 0 auto;
   padding: var(--space-12) clamp(2rem, 5vw, 6rem);
+}
+
+.hero-inner .hero-subtitle {
+  margin: 0 auto var(--space-10) auto !important;
+}
+
+.hero-inner .hero-buttons {
+  justify-content: center !important;
 }
 
 .hero-content {
@@ -912,6 +920,8 @@ img {
   justify-content: center;
   align-items: center;
   width: 100%;
+  position: relative;
+  z-index: 5;
 }
 
 .hero-right {
@@ -920,17 +930,19 @@ img {
   align-items: center;
   width: 100%;
   position: relative;
+  z-index: 2;
 }
 
 .hero-image-wrapper {
   position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 620px;
   aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 1000px; /* Enable 3D tilt perspective */
+  mix-blend-mode: screen; /* Blend wrapper with hero background */
 }
 
 .hero-image-container {
@@ -941,6 +953,7 @@ img {
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d; /* Maintain 3D rendering context */
+  mix-blend-mode: screen; /* Prevent isolation in stacking context */
 }
 
 .hero-image {
@@ -948,8 +961,8 @@ img {
   height: 100%;
   object-fit: cover;
   mix-blend-mode: screen;
-  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
-  -webkit-mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 85%);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 85%);
 }
 
 .hero-image-glow {
@@ -998,7 +1011,7 @@ img {
     gap: var(--space-8);
   }
   .hero-image-wrapper {
-    max-width: 380px;
+    max-width: 440px;
   }
 }
 
