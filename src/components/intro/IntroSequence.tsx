@@ -898,155 +898,392 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
               const collapseX = -(index - 2.5) * letterSpacingVw * mobileScale;
 
               return (
-                <motion.span
+                <div
                   key={index}
                   style={{
+                    position: 'relative',
                     display: 'inline-block',
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: isMobile ? 'clamp(1.8rem, 9vw, 3rem)' : 'clamp(2.2rem, 6.0vw, 5.5rem)',
-                    fontWeight: 800,
-                    letterSpacing: '0.02em',
-                    color: '#ffffff',
-                    willChange: 'transform, opacity, filter',
                     transformStyle: 'preserve-3d',
                   }}
-                  initial={{
-                    opacity: 0,
-                    y: '10vh',
-                    scale: 0.3,
-                    rotateX: 90,
-                    filter: 'blur(20px)',
-                  }}
-                  animate={
-                    phase === 'dissolve'
-                      ? {
-                          // Collapse inward towards center, scale down slightly, and high frequency vibration
-                          x: [
-                            `${-(index - 2.5) * 0.7}vw`,
-                            `${-(index - 2.5) * 0.7 + (index % 2 === 0 ? 0.15 : -0.15)}vw`,
-                            `${-(index - 2.5) * 0.7 + (index % 2 === 0 ? -0.15 : 0.15)}vw`,
-                            `${-(index - 2.5) * 0.7}vw`
-                          ],
-                          y: [
-                            '0vh',
-                            '0.2vh',
-                            '-0.2vh',
-                            '0vh'
-                          ],
-                          z: 0,
-                          scale: 0.92,
-                          rotateY: 0,
-                          rotateX: 0,
-                          rotateZ: [0, (index % 2 === 0 ? 0.5 : -0.5), 0],
-                          opacity: 1,
-                          filter: 'blur(0.5px)',
-                          textShadow: '0 0 40px rgba(0, 212, 255, 1), 0 0 70px rgba(123, 47, 190, 0.8)',
-                          transition: {
-                            x: { repeat: Infinity, duration: 0.15, ease: 'linear' },
-                            y: { repeat: Infinity, duration: 0.12, ease: 'linear' },
-                            rotateZ: { repeat: Infinity, duration: 0.18, ease: 'linear' },
-                            scale: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-                            filter: { duration: 0.5 },
-                            textShadow: { duration: 0.5 }
-                          }
-                        }
-                      : phase === 'splitting'
-                      ? {
-                          // 3D explosive dispersion: outward in X/Y, forward/backward in Z, spinning wildly in 3D
-                          x: `${(index - 2.5) * 35}vw`,
-                          y: `${(index % 2 === 0 ? -18 : 18)}vh`,
-                          z: 800,
-                          scale: 2.2,
-                          rotateX: (index - 2.5) * 120,
-                          rotateY: (index % 2 === 0 ? -180 : 180),
-                          rotateZ: (index - 2.5) * 60,
-                          opacity: [1, 1, 0],
-                          filter: ['blur(0px)', 'blur(0px)', 'blur(15px)'],
-                          textShadow: '0 0 80px rgba(255, 255, 255, 1)',
-                          transition: {
-                            x: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
-                            y: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
-                            z: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
-                            scale: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
-                            rotateX: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
-                            rotateY: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
-                            rotateZ: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
-                            opacity: {
-                              times: [0, 0.65, 1], // Stays fully opaque for 65% of 1.4s (910ms), then fades
-                              duration: 1.4,
-                              ease: 'easeOut',
-                              delay: Math.abs(index - 2.5) * 0.04
-                            },
-                            filter: {
-                              times: [0, 0.65, 1], // Stays sharp, blurs at the end
-                              duration: 1.4,
-                              ease: 'easeOut',
-                              delay: Math.abs(index - 2.5) * 0.04
+                >
+                  {/* 1. Outer Trail (Neural Violet / Magenta glow trail) */}
+                  <motion.span
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: isMobile ? 'clamp(1.8rem, 9vw, 3rem)' : 'clamp(2.2rem, 6.0vw, 5.5rem)',
+                      fontWeight: 800,
+                      color: '#7b2fbe',
+                      WebkitTextStroke: '1px rgba(123, 47, 190, 0.4)',
+                      mixBlendMode: 'screen',
+                      pointerEvents: 'none',
+                      userSelect: 'none',
+                      whiteSpace: 'nowrap',
+                      willChange: 'transform, opacity, filter',
+                      transformStyle: 'preserve-3d',
+                      zIndex: 8,
+                    }}
+                    initial={{
+                      opacity: 0,
+                      scale: 0.3,
+                      y: '10vh',
+                      rotateX: 90,
+                      filter: 'blur(20px)',
+                    }}
+                    animate={
+                      phase === 'dissolve'
+                        ? {
+                            x: [
+                              `${-(index - 2.5) * 0.8}vw`,
+                              `${-(index - 2.5) * 0.8 + (index % 2 === 0 ? 0.25 : -0.25)}vw`,
+                              `${-(index - 2.5) * 0.8 + (index % 2 === 0 ? -0.25 : 0.25)}vw`,
+                              `${-(index - 2.5) * 0.8}vw`
+                            ],
+                            y: [
+                              '0.3vh',
+                              '-0.1vh',
+                              '0.3vh',
+                              '-0.1vh'
+                            ],
+                            scale: 0.95,
+                            opacity: 0.8,
+                            filter: 'blur(2px)',
+                            textShadow: '0 0 30px #7b2fbe, 0 0 50px #ff007f',
+                            transition: {
+                              x: { repeat: Infinity, duration: 0.16, ease: 'linear' },
+                              y: { repeat: Infinity, duration: 0.13, ease: 'linear' },
+                              scale: { duration: 0.5 },
+                              opacity: { duration: 0.5 },
+                              filter: { duration: 0.5 }
                             }
                           }
-                        }
-                      : phase === 'breathing'
-                      ? {
-                          opacity: 1,
-                          y: [0, -6, 0],
-                          x: '0vw',
-                          z: 0,
-                          rotate: [0, index % 2 === 0 ? 1 : -1, 0],
-                          rotateY: 0,
-                          rotateX: 0,
-                          scale: 1,
-                          filter: 'blur(0px)',
-                          textShadow: [
-                            '0 0 25px rgba(0, 102, 255, 0.85), 0 0 45px rgba(0, 102, 255, 0.45)',
-                            '0 0 35px rgba(0, 102, 255, 0.95), 0 0 60px rgba(0, 102, 255, 0.55)',
-                            '0 0 25px rgba(0, 102, 255, 0.85), 0 0 45px rgba(0, 102, 255, 0.45)',
-                          ],
-                          transition: {
-                            y: {
-                              repeat: Infinity,
-                              duration: 3.2,
-                              ease: 'easeInOut',
-                              delay: index * 0.18,
-                            },
-                            rotate: {
-                              repeat: Infinity,
-                              duration: 4.8,
-                              ease: 'easeInOut',
-                              delay: index * 0.22,
-                            },
-                            textShadow: {
-                              repeat: Infinity,
-                              duration: 3.5,
-                              ease: 'easeInOut',
+                        : phase === 'splitting'
+                        ? {
+                            x: `${(index - 2.5) * 40}vw`,
+                            y: `${(index % 2 === 0 ? -22 : 22)}vh`,
+                            z: 400,
+                            scale: 1.6,
+                            rotateX: (index - 2.5) * 14,
+                            rotateY: (index % 2 === 0 ? -25 : 25),
+                            rotateZ: (index - 2.5) * 9,
+                            opacity: [0.7, 0.4, 0],
+                            filter: ['blur(3px)', 'blur(6px)', 'blur(30px)'],
+                            textShadow: '0 0 30px #7b2fbe, 0 0 60px #ff007f',
+                            transition: {
+                              x: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.06 },
+                              y: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.06 },
+                              z: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.06 },
+                              scale: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.06 },
+                              rotateX: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.06 },
+                              rotateY: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.06 },
+                              rotateZ: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.06 },
+                              opacity: { times: [0, 0.5, 1], duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.06 },
+                              filter: { times: [0, 0.5, 1], duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.06 }
+                            }
+                          }
+                        : phase === 'breathing'
+                        ? {
+                            opacity: 0.35,
+                            y: [2, -4, 2],
+                            x: '0vw',
+                            z: 0,
+                            scale: 1.02,
+                            filter: 'blur(4px)',
+                            textShadow: '0 0 20px rgba(123, 47, 190, 0.4)',
+                            transition: {
+                              y: {
+                                repeat: Infinity,
+                                duration: 3.2,
+                                ease: 'easeInOut',
+                                delay: index * 0.18,
+                              }
+                            }
+                          }
+                        : phase === 'arrival'
+                        ? {
+                            opacity: [0, 0.4, 0],
+                            y: '0vh',
+                            x: '0vw',
+                            z: 0,
+                            scale: 1,
+                            filter: 'blur(2px)',
+                            transition: {
+                              duration: 1.2,
+                              delay: index * 0.12 + 0.08
+                            }
+                          }
+                        : {}
+                    }
+                  >
+                    {char}
+                  </motion.span>
+
+                  {/* 2. Inner Trail (Electric Blue / Soft Cyan glow trail) */}
+                  <motion.span
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: isMobile ? 'clamp(1.8rem, 9vw, 3rem)' : 'clamp(2.2rem, 6.0vw, 5.5rem)',
+                      fontWeight: 800,
+                      color: '#00d4ff',
+                      WebkitTextStroke: '1px rgba(0, 212, 255, 0.4)',
+                      mixBlendMode: 'screen',
+                      pointerEvents: 'none',
+                      userSelect: 'none',
+                      whiteSpace: 'nowrap',
+                      willChange: 'transform, opacity, filter',
+                      transformStyle: 'preserve-3d',
+                      zIndex: 9,
+                    }}
+                    initial={{
+                      opacity: 0,
+                      scale: 0.3,
+                      y: '10vh',
+                      rotateX: 90,
+                      filter: 'blur(20px)',
+                    }}
+                    animate={
+                      phase === 'dissolve'
+                        ? {
+                            x: [
+                              `${-(index - 2.5) * 0.75}vw`,
+                              `${-(index - 2.5) * 0.75 + (index % 2 === 0 ? -0.2 : 0.2)}vw`,
+                              `${-(index - 2.5) * 0.75 + (index % 2 === 0 ? 0.2 : -0.2)}vw`,
+                              `${-(index - 2.5) * 0.75}vw`
+                            ],
+                            y: [
+                              '-0.2vh',
+                              '0.2vh',
+                              '-0.2vh',
+                              '0.2vh'
+                            ],
+                            scale: 0.93,
+                            opacity: 0.9,
+                            filter: 'blur(1px)',
+                            textShadow: '0 0 25px #00d4ff, 0 0 45px #0066ff',
+                            transition: {
+                              x: { repeat: Infinity, duration: 0.14, ease: 'linear' },
+                              y: { repeat: Infinity, duration: 0.11, ease: 'linear' },
+                              scale: { duration: 0.5 },
+                              opacity: { duration: 0.5 },
+                              filter: { duration: 0.5 }
+                            }
+                          }
+                        : phase === 'splitting'
+                        ? {
+                            x: `${(index - 2.5) * 37}vw`,
+                            y: `${(index % 2 === 0 ? -20 : 20)}vh`,
+                            z: 600,
+                            scale: 1.9,
+                            rotateX: (index - 2.5) * 16,
+                            rotateY: (index % 2 === 0 ? -30 : 30),
+                            rotateZ: (index - 2.5) * 10,
+                            opacity: [0.9, 0.5, 0],
+                            filter: ['blur(1.5px)', 'blur(3px)', 'blur(20px)'],
+                            textShadow: '0 0 25px #00d4ff, 0 0 50px #0066ff',
+                            transition: {
+                              x: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.03 },
+                              y: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.03 },
+                              z: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.03 },
+                              scale: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.03 },
+                              rotateX: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.03 },
+                              rotateY: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.03 },
+                              rotateZ: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.03 },
+                              opacity: { times: [0, 0.55, 1], duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.03 },
+                              filter: { times: [0, 0.55, 1], duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 + 0.03 }
+                            }
+                          }
+                        : phase === 'breathing'
+                        ? {
+                            opacity: 0.45,
+                            y: [1, -5, 1],
+                            x: '0vw',
+                            z: 0,
+                            scale: 1.01,
+                            filter: 'blur(2px)',
+                            textShadow: '0 0 15px rgba(0, 212, 255, 0.45)',
+                            transition: {
+                              y: {
+                                repeat: Infinity,
+                                duration: 3.2,
+                                ease: 'easeInOut',
+                                delay: index * 0.18,
+                              }
+                            }
+                          }
+                        : phase === 'arrival'
+                        ? {
+                            opacity: [0, 0.6, 0],
+                            y: '0vh',
+                            x: '0vw',
+                            z: 0,
+                            scale: 1,
+                            filter: 'blur(1px)',
+                            transition: {
+                              duration: 1.2,
+                              delay: index * 0.12 + 0.04
+                            }
+                          }
+                        : {}
+                    }
+                  >
+                    {char}
+                  </motion.span>
+
+                  {/* 3. Main Letter Layer (Gleaming white with high contrast shadows) */}
+                  <motion.span
+                    style={{
+                      display: 'inline-block',
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: isMobile ? 'clamp(1.8rem, 9vw, 3rem)' : 'clamp(2.2rem, 6.0vw, 5.5rem)',
+                      fontWeight: 800,
+                      letterSpacing: '0.02em',
+                      color: '#ffffff',
+                      willChange: 'transform, opacity, filter',
+                      transformStyle: 'preserve-3d',
+                      zIndex: 10,
+                      position: 'relative',
+                    }}
+                    initial={{
+                      opacity: 0,
+                      y: '10vh',
+                      scale: 0.3,
+                      rotateX: 90,
+                      filter: 'blur(20px)',
+                    }}
+                    animate={
+                      phase === 'dissolve'
+                        ? {
+                            x: [
+                              `${-(index - 2.5) * 0.7}vw`,
+                              `${-(index - 2.5) * 0.7 + (index % 2 === 0 ? 0.15 : -0.15)}vw`,
+                              `${-(index - 2.5) * 0.7 + (index % 2 === 0 ? -0.15 : 0.15)}vw`,
+                              `${-(index - 2.5) * 0.7}vw`
+                            ],
+                            y: [
+                              '0vh',
+                              '0.2vh',
+                              '-0.2vh',
+                              '0vh'
+                            ],
+                            z: 0,
+                            scale: 0.92,
+                            rotateY: 0,
+                            rotateX: 0,
+                            rotateZ: [0, (index % 2 === 0 ? 0.5 : -0.5), 0],
+                            opacity: 1,
+                            filter: 'blur(0.5px)',
+                            textShadow: '0 2px 10px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 212, 255, 1), 0 0 65px rgba(123, 47, 190, 0.8)',
+                            transition: {
+                              x: { repeat: Infinity, duration: 0.15, ease: 'linear' },
+                              y: { repeat: Infinity, duration: 0.12, ease: 'linear' },
+                              rotateZ: { repeat: Infinity, duration: 0.18, ease: 'linear' },
+                              scale: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+                              filter: { duration: 0.5 },
+                              textShadow: { duration: 0.5 }
+                            }
+                          }
+                        : phase === 'splitting'
+                        ? {
+                            x: `${(index - 2.5) * 35}vw`,
+                            y: `${(index % 2 === 0 ? -18 : 18)}vh`,
+                            z: 800,
+                            scale: 2.2,
+                            rotateX: (index - 2.5) * 18,
+                            rotateY: (index % 2 === 0 ? -35 : 35),
+                            rotateZ: (index - 2.5) * 12,
+                            opacity: [1, 1, 0],
+                            filter: ['blur(0px)', 'blur(0px)', 'blur(15px)'],
+                            textShadow: '0 2px 12px rgba(0, 0, 0, 0.95), 0 0 25px rgba(255, 255, 255, 1), 0 0 45px rgba(0, 212, 255, 0.9), 0 0 75px rgba(123, 47, 190, 0.7)',
+                            transition: {
+                              x: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                              y: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                              z: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                              scale: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                              rotateX: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                              rotateY: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                              rotateZ: { duration: 1.4, ease: 'easeOut', delay: Math.abs(index - 2.5) * 0.04 },
+                              opacity: {
+                                times: [0, 0.65, 1],
+                                duration: 1.4,
+                                ease: 'easeOut',
+                                delay: Math.abs(index - 2.5) * 0.04
+                              },
+                              filter: {
+                                times: [0, 0.65, 1],
+                                duration: 1.4,
+                                ease: 'easeOut',
+                                delay: Math.abs(index - 2.5) * 0.04
+                              }
+                            }
+                          }
+                        : phase === 'breathing'
+                        ? {
+                            opacity: 1,
+                            y: [0, -6, 0],
+                            x: '0vw',
+                            z: 0,
+                            rotate: [0, index % 2 === 0 ? 1 : -1, 0],
+                            rotateY: 0,
+                            rotateX: 0,
+                            scale: 1,
+                            filter: 'blur(0px)',
+                            textShadow: [
+                              '0 2px 8px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 102, 255, 0.85), 0 0 45px rgba(0, 102, 255, 0.45)',
+                              '0 2px 12px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 102, 255, 0.95), 0 0 60px rgba(0, 102, 255, 0.55)',
+                              '0 2px 8px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 102, 255, 0.85), 0 0 45px rgba(0, 102, 255, 0.45)',
+                            ],
+                            transition: {
+                              y: {
+                                repeat: Infinity,
+                                duration: 3.2,
+                                ease: 'easeInOut',
+                                delay: index * 0.18,
+                              },
+                              rotate: {
+                                repeat: Infinity,
+                                duration: 4.8,
+                                ease: 'easeInOut',
+                                delay: index * 0.22,
+                              },
+                              textShadow: {
+                                repeat: Infinity,
+                                duration: 3.5,
+                                ease: 'easeInOut',
+                                delay: index * 0.12,
+                              },
+                            }
+                          }
+                        : phase === 'arrival'
+                        ? {
+                            opacity: 1,
+                            y: '0vh',
+                            x: '0vw',
+                            z: 0,
+                            rotate: 0,
+                            rotateY: 0,
+                            rotateX: 0,
+                            scale: 1,
+                            filter: 'blur(0px)',
+                            textShadow: '0 2px 8px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 102, 255, 0.85), 0 0 50px rgba(0, 102, 255, 0.45)',
+                            transition: {
+                              type: 'spring',
+                              stiffness: 140,
+                              damping: 15,
+                              mass: 0.9,
                               delay: index * 0.12,
-                            },
+                            }
                           }
-                        }
-                      : phase === 'arrival'
-                      ? {
-                          opacity: 1,
-                          y: '0vh',
-                          x: '0vw',
-                          z: 0,
-                          rotate: 0,
-                          rotateY: 0,
-                          rotateX: 0,
-                          scale: 1,
-                          filter: 'blur(0px)',
-                          textShadow: '0 0 25px rgba(0, 102, 255, 0.85), 0 0 50px rgba(0, 102, 255, 0.45)',
-                          transition: {
-                            type: 'spring',
-                            stiffness: 140,
-                            damping: 15,
-                            mass: 0.9,
-                            delay: index * 0.12,
-                          }
-                        }
-                      : {}
-                  }
-                >
-                  {char}
-                </motion.span>
+                        : {}
+                    }
+                  >
+                    {char}
+                  </motion.span>
+                </div>
               );
             })}
           </div>
