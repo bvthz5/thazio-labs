@@ -630,8 +630,8 @@ img {
     background var(--transition-base),
     border-color var(--transition-base),
     box-shadow var(--transition-base);
-  /* Dark frosted glass — opaque enough to read text clearly even if backdrop-filter fails */
-  background: rgba(10, 14, 26, 0.82);
+  /* Dark frosted glass — nearly opaque so underlay content is barely visible */
+  background: rgba(10, 14, 26, 0.94);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -650,8 +650,8 @@ img {
 }
 
 .navbar.scrolled {
-  /* Light frosted glass — semi-opaque white with strong blur */
-  background: rgba(245, 247, 252, 0.78);
+  /* Light frosted glass — nearly opaque so underlay content is barely visible */
+  background: rgba(245, 247, 252, 0.92);
   backdrop-filter: blur(28px) saturate(200%);
   -webkit-backdrop-filter: blur(28px) saturate(200%);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -694,8 +694,8 @@ img {
 
 .navbar-links a {
   font-size: var(--text-sm);
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.75) !important;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95) !important;
   transition: color var(--transition-fast);
   position: relative;
 }
@@ -722,7 +722,7 @@ img {
 }
 
 .navbar.scrolled .navbar-links a {
-  color: var(--color-charcoal) !important;
+  color: var(--color-obsidian) !important;
 }
 
 .navbar.scrolled .navbar-links a:hover {
