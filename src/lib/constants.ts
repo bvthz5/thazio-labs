@@ -79,41 +79,49 @@ export const INDUSTRIES = [
     title: 'Retail',
     description: 'AI-powered demand forecasting, personalized shopping experiences, and autonomous supply chain optimization that maximize revenue per customer.',
     gradient: 'linear-gradient(135deg, #0066FF20, #7B2FBE30, #00D4FF20)',
+    image: '/images/industries/retail_realistic_1781717327980.png',
   },
   {
     title: 'Advertising & Media',
     description: 'Intelligent campaign orchestration, programmatic ad placement, and real-time audience analytics that deliver measurable ROI at scale.',
     gradient: 'linear-gradient(135deg, #7B2FBE20, #00D4FF30, #0066FF20)',
+    image: '/images/industries/advertising_realistic_1781717344041.png',
   },
   {
     title: 'Education',
     description: 'Adaptive learning platforms, automated curriculum delivery, and student performance analytics that personalize education for every learner.',
     gradient: 'linear-gradient(135deg, #00D4FF20, #0066FF30, #7B2FBE20)',
+    image: '/images/industries/education_realistic_1781717358257.png',
   },
   {
     title: 'Telecommunication',
     description: 'Network optimization, intelligent customer service automation, and predictive maintenance systems that reduce downtime and churn.',
     gradient: 'linear-gradient(135deg, #0066FF25, #00D4FF30, #7B2FBE15)',
+    image: '/images/industries/telecom_realistic_1781717371981.png',
   },
   {
     title: 'Healthcare',
     description: 'AI-assisted diagnostics, automated patient workflow management, and clinical data analytics that improve outcomes while reducing operational costs.',
     gradient: 'linear-gradient(135deg, #7B2FBE25, #0066FF30, #00D4FF15)',
+    image: '/images/industries/healthcare_realistic_1781717385399.png',
   },
   {
     title: 'E-Commerce',
     description: 'Autonomous inventory management, dynamic pricing engines, and conversational AI shopping assistants that drive conversion and loyalty.',
     gradient: 'linear-gradient(135deg, #00D4FF25, #7B2FBE30, #0066FF15)',
+    image: '/images/industries/ecommerce_realistic_1781717398472.png',
   },
   {
     title: 'Finance',
     description: 'Algorithmic trading systems, automated compliance monitoring, fraud detection, and risk assessment platforms powered by real-time intelligence.',
     gradient: 'linear-gradient(135deg, #0066FF20, #00D4FF25, #7B2FBE30)',
+    image: '/images/industries/finance_realistic_1781717411260.png',
   },
   {
     title: 'Utilities',
     description: 'Smart grid optimization, predictive infrastructure maintenance, and automated resource distribution that maximize efficiency across networks.',
     gradient: 'linear-gradient(135deg, #7B2FBE20, #0066FF25, #00D4FF30)',
+    image: '/images/industries/utilities_realistic_1781717424222.png',
   },
 ] as const;
 

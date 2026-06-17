@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
+import Image from 'next/image';
 import SectionHeading from '../ui/SectionHeading';
 import { INDUSTRIES } from '@/lib/constants';
 
@@ -27,19 +28,36 @@ export default function IndustriesSection() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.7, delay: Math.min(i * 0.08, 0.45), ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Premium abstract visual backdrop gradient */}
+              {/* Premium abstract visual backdrop image */}
               <div 
                 className="industry-card-bg"
                 style={{
-                  background: ind.gradient,
                   position: 'absolute',
                   top: 0,
                   left: 0,
                   width: '100%',
                   height: '100%',
                   zIndex: 0,
+                  overflow: 'hidden',
+                  borderRadius: 'inherit',
                 }}
-              />
+              >
+                <Image
+                  src={ind.image}
+                  alt={ind.title}
+                  fill
+                  style={{ objectFit: 'cover', opacity: 0.4 }}
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: ind.gradient,
+                    mixBlendMode: 'overlay',
+                    opacity: 0.8,
+                  }}
+                />
+              </div>
               
               <div className="industry-card-overlay" />
               <div className="industry-card-neural-overlay" />
