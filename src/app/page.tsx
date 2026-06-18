@@ -20,17 +20,12 @@ const HeroSection = dynamic(() => import('@/components/hero/HeroSection'), {
   loading: () => <div style={{ height: '100vh' }} />,
 });
 
-const StatsBar = dynamic(() => import('@/components/stats/StatsBar'), {
-  ssr: false,
-  loading: () => <div style={{ height: '200px' }} />,
-});
-
-const CapabilitiesSection = dynamic(() => import('@/components/bci/BCISection'), {
+const ServicesSection = dynamic(() => import('@/components/services/ServicesSection'), {
   ssr: false,
   loading: () => <div style={{ height: '100vh' }} />,
 });
 
-const ServicesSection = dynamic(() => import('@/components/services/ServicesSection'), {
+const WhyChooseUsSection = dynamic(() => import('@/components/why-choose-us/WhyChooseUsSection'), {
   ssr: false,
   loading: () => <div style={{ height: '100vh' }} />,
 });
@@ -45,7 +40,17 @@ const InsightsSection = dynamic(() => import('@/components/insights/InsightsSect
   loading: () => <div style={{ height: '100vh' }} />,
 });
 
-const CompanySection = dynamic(() => import('@/components/innovation/InnovationLab'), {
+const StatsBar = dynamic(() => import('@/components/stats/StatsBar'), {
+  ssr: false,
+  loading: () => <div style={{ height: '200px' }} />,
+});
+
+const LocationsSection = dynamic(() => import('@/components/locations/LocationsSection'), {
+  ssr: false,
+  loading: () => <div style={{ height: '100vh' }} />,
+});
+
+const FAQSection = dynamic(() => import('@/components/faq/FAQSection'), {
   ssr: false,
   loading: () => <div style={{ height: '100vh' }} />,
 });
@@ -56,9 +61,15 @@ const ContactSection = dynamic(() => import('@/components/contact/ContactSection
 });
 
 export default function HomePage() {
-  // Always start with intro incomplete to play it on every single reload
   const [introComplete, setIntroComplete] = useState<boolean>(false);
   const [showContent, setShowContent] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    if (sessionStorage.getItem('thazio_intro_played') === 'true') {
+      setIntroComplete(true);
+      setShowContent(true);
+    }
+  }, []);
 
   const handleIntroComplete = () => {
     // Reveal homepage content smoothly
@@ -66,6 +77,7 @@ export default function HomePage() {
     // Unmount intro overlay after the white bloom bridge has fully faded
     setTimeout(() => {
       setIntroComplete(true);
+      sessionStorage.setItem('thazio_intro_played', 'true');
     }, 700);
   };
 
@@ -93,25 +105,28 @@ export default function HomePage() {
           {/* Hero Section */}
           <HeroSection active={showContent} />
 
-          {/* Stats Bar */}
-          <StatsBar />
-
-          {/* Core Capabilities */}
-          <CapabilitiesSection />
-
           {/* Services Section */}
           <ServicesSection />
+
+          {/* Why Choose Us */}
+          <WhyChooseUsSection />
 
           {/* Industries Section */}
           <IndustriesSection />
 
-          {/* Insights Section */}
+          {/* News & Insights */}
           <InsightsSection />
 
-          {/* Company Section */}
-          <CompanySection />
+          {/* Statistics */}
+          <StatsBar />
 
-          {/* Contact Section */}
+          {/* Locations */}
+          <LocationsSection />
+
+          {/* FAQ */}
+          <FAQSection />
+
+          {/* Contact */}
           <ContactSection />
         </main>
 

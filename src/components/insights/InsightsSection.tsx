@@ -1,127 +1,138 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React from 'react';
+import { motion } from 'motion/react';
+import Link from 'next/link';
 import SectionHeading from '../ui/SectionHeading';
-import { INSIGHTS, INSIGHT_CATEGORIES } from '@/lib/constants';
-
-const displayLabels: Record<typeof INSIGHT_CATEGORIES[number], string> = {
-  All: 'All Publications',
-  Newsroom: 'Newsroom',
-  Blog: 'Blog',
-  'Case Study': 'Case Studies',
-  'E-Book': 'E-Books',
-};
+import { INSIGHTS } from '@/lib/constants';
 
 export default function InsightsSection() {
-  const [activeTab, setActiveTab] = useState<typeof INSIGHT_CATEGORIES[number]>('All');
-
-  // Filter items matching selected category
-  const filteredInsights = INSIGHTS.filter(
-    (item) => activeTab === 'All' || item.tag === activeTab
-  );
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  
+  // Display the top 4 latest news/insights on the homepage
+  const latestNews = INSIGHTS.slice(0, 4);
 
   return (
-    <section id="insights" className="insights-section section">
-      <div className="container">
+    <section id="insights" className="insights-section section section-dark" style={{ background: '#070A13', position: 'relative' }}>
+      {/* Decorative ambient background glows */}
+      <div
+        style={{
+          position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)',
+          width: '800px', height: '400px',
+          background: 'radial-gradient(circle, rgba(0, 102, 255, 0.02), transparent 70%)',
+          pointerEvents: 'none', zIndex: 0
+        }}
+      />
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <SectionHeading
-          overline="INSIGHTS"
-          title="Latest From Thazio"
-          description="Stay updated with our latest news, technical deep-dives, customer success stories, and industry reports."
+          overline="NEWS & INSIGHTS"
+          title="Latest News"
+          description="Stay updated with our latest announcements, technical blogs, and breakthroughs."
+          centered
+          light
         />
 
-        {/* Tab Selection */}
-        <div className="insights-tabs">
-          {INSIGHT_CATEGORIES.map((tab) => (
-            <button
-              key={tab}
-              className={`insights-tab ${activeTab === tab ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab)}
+        {/* Vertical news list feed matching screenshot 4 */}
+        <div className="news-list-container">
+          {latestNews.map((item, index) => (
+            <motion.div
+              key={item.slug}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
             >
-              {displayLabels[tab]}
-            </button>
+              <Link 
+                href={`/insights/${item.slug}/`}
+                className="news-row-item"
+              >
+                {/* Date */}
+                <div className="news-row-date">
+                  {item.date}
+                </div>
+
+                {/* Title */}
+                <div className="news-row-title-wrapper">
+                  <h4 className="news-row-title">
+                    {item.title}
+                  </h4>
+                </div>
+
+                {/* Up-Right Arrow circle badge */}
+                <div className="news-row-arrow-badge">
+                  <svg 
+                    width="14" 
+                    height="14" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2.5" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    className="news-row-arrow-svg"
+                  >
+                    <line x1="7" y1="17" x2="17" y2="7"/>
+                    <polyline points="7 7 17 7 17 17"/>
+                  </svg>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
 
-        {/* Insights Grid */}
-        <div className="insights-grid">
-          <AnimatePresence mode="popLayout">
-            {filteredInsights.map((insight, index) => {
-              if (insight.featured) {
-                return (
-                  <motion.div
-                    key={insight.title}
-                    className="insight-card-featured"
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    {/* Abstract synthetic structural overlay */}
-                    <div 
-                      style={{
-                        width: '100%',
-                        height: '240px',
-                        background: 'linear-gradient(135deg, #0A0E1A, #7B2FBE, #0066FF)',
-                        opacity: 0.85,
-                        position: 'relative'
-                      }}
-                    >
-                      <div 
-                        style={{
-                          position: 'absolute',
-                          top: '15%',
-                          left: '10%',
-                          width: '80%',
-                          height: '70%',
-                          border: '1px solid rgba(255,255,255,0.06)',
-                          borderRadius: '12px'
-                        }}
-                      />
-                    </div>
-
-                    <div className="insight-featured-content">
-                      <span className="insight-featured-tag">{insight.tag}</span>
-                      <h3>{insight.title}</h3>
-                      <p>{insight.description}</p>
-                      
-                      <div className="insight-card-meta" style={{ marginTop: 'var(--space-6)', color: 'rgba(255,255,255,0.4)' }}>
-                        <span>{insight.date}</span>
-                        <span>•</span>
-                        <span>{insight.readTime}</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              }
-
-              return (
-                <motion.div
-                  key={insight.title}
-                  className="insight-card"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
-                >
-                  <div>
-                    <span className="insight-card-tag">{insight.tag}</span>
-                    <h4>{insight.title}</h4>
-                    <p style={{ marginTop: '8px', fontSize: 'var(--text-sm)' }}>
-                      {insight.description}
-                    </p>
-                  </div>
-                  
-                  <div className="insight-card-meta">
-                    <span>{insight.date}</span>
-                    <span>•</span>
-                    <span>{insight.readTime}</span>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+        {/* View all button linking to dynamic insights page */}
+        <div style={{ textAlign: 'center', marginTop: 'var(--space-12)' }}>
+          <Link 
+            href="/insights/"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '12px 32px',
+              fontSize: 'var(--text-sm)',
+              fontWeight: 700,
+              color: 'var(--color-white)',
+              background: '#0066FF',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 4px 15px rgba(0, 102, 255, 0.25)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#3388FF';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 102, 255, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#0066FF';
+              e.currentTarget.style.transform = 'none';
+              e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 102, 255, 0.25)';
+            }}
+          >
+            View all
+            <svg 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              style={{ marginLeft: '8px', transition: 'transform 0.2s ease' }}
+              className="view-all-arrow"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateX(4px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'none';
+              }}
+            >
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

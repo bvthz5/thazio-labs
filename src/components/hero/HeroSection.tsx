@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { motion } from 'motion/react';
 import HeroContent from './HeroContent';
 
 interface HeroSectionProps {
@@ -9,20 +9,6 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ active = true }: HeroSectionProps) {
-  // Motion values for normalized mouse positions (-0.5 to 0.5)
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Springs for buttery smooth mouse response
-  const springX = useSpring(mouseX, { stiffness: 60, damping: 25 });
-  const springY = useSpring(mouseY, { stiffness: 60, damping: 25 });
-
-  // Map mouse positions to 3D rotation and translation offsets
-  const x = useTransform(springX, [-0.5, 0.5], [-20, 20]);
-  const y = useTransform(springY, [-0.5, 0.5], [-20, 20]);
-  const rotateX = useTransform(springY, [-0.5, 0.5], [15, -15]); // Tilt forward/backward
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-15, 15]);  // Tilt left/right
-
   // Mouse coords for background neon glow spotlight
   const [mouseCoords, setMouseCoords] = React.useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = React.useState(false);
@@ -37,21 +23,9 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
     
     setMouseCoords({ x: relativeX, y: relativeY });
     setIsHovered(true);
-
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    
-    // Normalize coordinates (-0.5 to 0.5)
-    const normalizedX = (clientX / innerWidth) - 0.5;
-    const normalizedY = (clientY / innerHeight) - 0.5;
-    
-    mouseX.set(normalizedX);
-    mouseY.set(normalizedY);
   };
 
   const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
     setIsHovered(false);
   };
 
@@ -66,16 +40,6 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
     
     setMouseCoords({ x: relativeX, y: relativeY });
     setIsHovered(true);
-
-    const { clientX, clientY } = touch;
-    const { innerWidth, innerHeight } = window;
-    
-    // Normalize coordinates (-0.5 to 0.5)
-    const normalizedX = (clientX / innerWidth) - 0.5;
-    const normalizedY = (clientY / innerHeight) - 0.5;
-    
-    mouseX.set(normalizedX);
-    mouseY.set(normalizedY);
   };
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
@@ -85,8 +49,6 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
 
   const handleTouchEnd = () => {
     setIsHovered(false);
-    mouseX.set(0);
-    mouseY.set(0);
   };
 
   return (
@@ -159,10 +121,64 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
       />
       
       <div className="container" style={{ position: 'relative', zIndex: 5 }}>
-        <div className="hero-inner">
+        <div className="hero-inner" style={{ textAlign: 'center', margin: '0 auto', maxWidth: '900px' }}>
           <HeroContent active={active} />
         </div>
       </div>
+
+
+
+      {/* Floating Support chat bubble */}
+      <a
+        href="mailto:info@thazio.com"
+        style={{
+          position: 'fixed',
+          right: '25px',
+          bottom: '25px',
+          width: '60px',
+          height: '60px',
+          borderRadius: '50%',
+          background: '#0F52BA',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 4px 24px rgba(15, 82, 186, 0.45)',
+          color: '#fff',
+          zIndex: 99,
+          transition: 'all 0.3s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'scale(1.08)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'scale(1)';
+        }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        {/* Notification Badge */}
+        <span 
+          style={{
+            position: 'absolute',
+            top: '2px',
+            right: '2px',
+            width: '18px',
+            height: '18px',
+            borderRadius: '50%',
+            background: '#FF0055',
+            color: '#fff',
+            fontSize: '0.65rem',
+            fontWeight: 800,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '2px solid #0F52BA'
+          }}
+        >
+          1
+        </span>
+      </a>
     </section>
   );
 }

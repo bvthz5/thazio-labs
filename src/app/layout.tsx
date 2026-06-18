@@ -26,23 +26,23 @@ export const metadata: Metadata = {
     template: "%s | THAZIO"
   },
   description:
-    "THAZIO (sometimes searched as tazhio) is a next-generation Artificial Intelligence, Brain-Computer Interface, Neural Intelligence, Enterprise Automation, and Emerging Technology company engineering intelligent futures.",
+    "THAZIO Labs is an AI-first engineering company building intelligent software, autonomous systems, and data-driven solutions for businesses, institutions, and governments worldwide.",
   applicationName: "THAZIO",
   authors: [{ name: "THAZIO", url: "https://bvthz5.github.io/thazio-labs" }],
   generator: "Next.js",
   keywords: [
     "THAZIO",
-    "tazhio",
     "thazio labs",
-    "Artificial Intelligence",
-    "Brain-Computer Interface",
-    "Neural Intelligence",
-    "Enterprise Automation",
-    "Emerging Technology",
-    "BCI",
-    "Machine Learning",
-    "Deep Learning",
-    "AI Engineering",
+    "AI-first engineering",
+    "autonomous systems",
+    "software engineering",
+    "artificial intelligence",
+    "data analytics",
+    "automation solutions",
+    "cloud infrastructure",
+    "AI agents",
+    "intelligent systems",
+    "custom software development",
   ],
   creator: "THAZIO",
   publisher: "THAZIO",
@@ -60,9 +60,9 @@ export const metadata: Metadata = {
     canonical: '/thazio-labs',
   },
   openGraph: {
-    title: "THAZIO",
+    title: "THAZIO LABS | AI-First Engineering & Autonomous Systems",
     description:
-      "THAZIO is a next-generation Artificial Intelligence and Brain-Computer Interface company. Engineering intelligent futures through AI and enterprise automation.",
+      "AI-first engineering company building intelligent software, autonomous systems, and data-driven solutions for businesses, institutions, and governments.",
     url: "https://bvthz5.github.io/thazio-labs",
     siteName: "THAZIO",
     images: [
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "THAZIO",
     description:
-      "THAZIO is a next-generation Artificial Intelligence and Brain-Computer Interface company. Engineering intelligent futures through AI and enterprise automation.",
+      "AI-first engineering company building intelligent software, autonomous systems, and data-driven solutions for businesses, institutions, and governments.",
     images: ["/thazio-labs/images/logo_transparent.png"],
   },
   robots: {

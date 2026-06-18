@@ -36,17 +36,37 @@ export function useSmoothScroll() {
       const target = (e.target as HTMLElement).closest('a');
       if (!target) return;
       const href = target.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        const targetId = href.replace('#', '');
-        if (!targetId) return; // ignore empty hash links
-        e.preventDefault();
-        const element = document.getElementById(targetId);
-        if (element) {
-          lenis.scrollTo(element, {
-            offset: -72,
-            duration: 1.0,
-            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          });
+      if (href) {
+        if (href.startsWith('#')) {
+          const targetId = href.replace('#', '');
+          if (!targetId) return;
+          const element = document.getElementById(targetId);
+          if (element) {
+            e.preventDefault();
+            lenis.scrollTo(element, {
+              offset: -72,
+              duration: 1.0,
+              easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+          } else {
+            // Element not found on this page (e.g. detail page), redirect to home page with hash
+            e.preventDefault();
+            const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+            window.location.href = `${basePath}/${href}`;
+          }
+        } else if (href.includes('#')) {
+          const hashIndex = href.indexOf('#');
+          const hash = href.substring(hashIndex);
+          const targetId = hash.replace('#', '');
+          const element = document.getElementById(targetId);
+          if (element) {
+            e.preventDefault();
+            lenis.scrollTo(element, {
+              offset: -72,
+              duration: 1.0,
+              easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+          }
         }
       }
     };

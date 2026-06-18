@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'motion/react';
 import { STATS } from '@/lib/constants';
+import SectionHeading from '../ui/SectionHeading';
 
 interface CounterProps {
   value: string;
@@ -10,7 +11,6 @@ interface CounterProps {
 }
 
 function Counter({ value, duration = 2 }: CounterProps) {
-  // Use a lazy state initializer to safely set starting values
   const [count, setCount] = useState(() => value);
   const countRef = useRef(0);
   const containerRef = useRef(null);
@@ -59,23 +59,31 @@ function Counter({ value, duration = 2 }: CounterProps) {
 
 export default function StatsBar() {
   return (
-    <section className="stats-bar">
-      <div className="stats-grid">
-        {STATS.map((stat, i) => (
-          <motion.div 
-            key={i} 
-            className="stat-item"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.6, delay: i * 0.1, ease: 'easeOut' }}
-          >
-            <div className="stat-number text-gradient">
-              <Counter value={stat.number} />
-            </div>
-            <div className="stat-label">{stat.label}</div>
-          </motion.div>
-        ))}
+    <section className="stats-section section section-dark" id="statistics">
+      <div className="container">
+        <SectionHeading
+          overline="STATISTICS"
+          title="By The Numbers"
+          centered
+          light
+        />
+        <div className="stats-grid" style={{ marginTop: 'var(--space-10)' }}>
+          {STATS.map((stat, i) => (
+            <motion.div 
+              key={i} 
+              className="stat-item"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="stat-number text-gradient">
+                <Counter value={stat.number} />
+              </div>
+              <div className="stat-label">{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

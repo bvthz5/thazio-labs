@@ -9,33 +9,48 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08, // Beautiful, rapid staging
-      delayChildren: 0.15,
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
     },
   },
 };
 
-const titleLineVariants: Variants = {
-  hidden: { y: '105%', opacity: 0 },
+const lineContainerVariants: Variants = {
+  hidden: { opacity: 1 },
   visible: {
-    y: '0%',
     opacity: 1,
     transition: {
-      duration: 1.0, // Slow, majestic sweep
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      staggerChildren: 0.03, // 30ms character stagger
+    },
+  },
+};
+
+const characterVariants: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: '50%', 
+    filter: 'blur(3px)',
+  },
+  visible: {
+    opacity: 1,
+    y: '0%',
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20, filter: 'blur(6px)' }, // smooth rise for subtitle/buttons
+  hidden: { opacity: 0, y: 20, filter: 'blur(4px)' },
   visible: {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
     transition: {
       duration: 0.8,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 };
@@ -51,17 +66,15 @@ export default function HeroContent({ active = true }: HeroContentProps) {
     if (element) {
       if (typeof window !== 'undefined' && 'lenis' in window && (window as unknown as { lenis: { scrollTo: (el: HTMLElement, opts: unknown) => void } }).lenis) {
         (window as unknown as { lenis: { scrollTo: (el: HTMLElement, opts: unknown) => void } }).lenis.scrollTo(element, {
-          offset: -72,
+          offset: -80,
           duration: 1.0,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
         });
       } else {
-        const navHeight = 72;
+        const navHeight = 80;
         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - navHeight;
-
         window.scrollTo({
-          top: offsetPosition,
+          top: elementPosition - navHeight,
           behavior: 'smooth'
         });
       }
@@ -74,69 +87,80 @@ export default function HeroContent({ active = true }: HeroContentProps) {
       variants={containerVariants}
       initial="hidden"
       animate={active ? "visible" : "hidden"}
+      style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto' }}
     >
-      {/* Main Title — 3 lines with overflow-clipping reveal masks */}
-      <h1 className="hero-title">
-        <div style={{ overflow: 'hidden', paddingBottom: '0.05em' }}>
-          <motion.span className="hero-title-line" variants={titleLineVariants}>
-            THE WORLD&apos;S FIRST
-          </motion.span>
-        </div>
-        <div style={{ overflow: 'hidden', paddingBottom: '0.05em' }}>
+      <h1 className="hero-title" style={{ margin: 0, padding: 0 }}>
+        {/* Line 1: Data Driven, */}
+        <motion.span 
+          className="hero-title-line" 
+          style={{ display: 'block', marginBottom: '8px' }}
+          initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+          animate={active ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        >
+          Data Driven,
+        </motion.span>
+
+        {/* Line 2: AI Powered */}
+        <motion.span 
+          className="hero-title-line gradient" 
+          style={{ display: 'block', marginBottom: '8px' }}
+          initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+          animate={active ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
+        >
+          AI Powered
+        </motion.span>
+
+        {/* Line 3: Digital Transformation. */}
+        <span className="hero-title-line" style={{ display: 'block', marginBottom: '24px', overflow: 'hidden' }}>
           <motion.span
-            className="hero-title-line gradient"
-            variants={titleLineVariants}
-            style={{
-              background: 'var(--gradient-text-neural)',
-              backgroundSize: '300% auto',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              animation: 'shimmer 6s ease infinite',
-              fontWeight: 700,
-            }}
+            style={{ display: 'block' }}
+            initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+            animate={active ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.34 }}
           >
-            FULLY AUTOMATED
+            Digital Transformation.
           </motion.span>
-        </div>
-        <div style={{ overflow: 'hidden', paddingBottom: '0.05em' }}>
-          <motion.span className="hero-title-line" variants={titleLineVariants}>
-            COMPANY
-          </motion.span>
-        </div>
+        </span>
       </h1>
 
-      {/* Subtitle */}
-      <motion.p className="hero-subtitle" variants={itemVariants}>
-        Replace manual operations with intelligent agent networks. Thazio runs your workflows, manages data, and scales infrastructure without human intervention.
-      </motion.p>
-
-      {/* CTA Buttons */}
-      <motion.div className="hero-buttons" variants={itemVariants}>
-        <GlassButton
-          variant="primary"
-          href="#services"
-          onClick={(e: React.MouseEvent<HTMLButtonElement & HTMLAnchorElement>) => handleScrollTo(e, 'services')}
+      {/* Let's Talk CTA button */}
+      <motion.div 
+        className="hero-buttons" 
+        style={{ marginTop: 'var(--space-8)', justifyContent: 'center' }}
+        initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+        animate={active ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
+      >
+        <a
+          href="#contact"
+          onClick={(e) => handleScrollTo(e, 'contact')}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '16px 36px',
+            fontSize: 'var(--text-base)',
+            fontWeight: 700,
+            color: 'var(--color-white)',
+            borderRadius: 'var(--radius-full)',
+            background: 'linear-gradient(135deg, var(--color-neural-violet), var(--color-electric-blue))',
+            boxShadow: '0 4px 20px rgba(123, 47, 190, 0.4)',
+            transition: 'all 0.3s ease',
+            textDecoration: 'none'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 6px 25px rgba(123, 47, 190, 0.6)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 4px 20px rgba(123, 47, 190, 0.4)';
+          }}
         >
-          Explore Services
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '4px' }}>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </GlassButton>
-        <GlassButton
-          variant="secondary"
-          href="#company"
-          onClick={(e: React.MouseEvent<HTMLButtonElement & HTMLAnchorElement>) => handleScrollTo(e, 'company')}
-        >
-          Meet the Team
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '4px' }}>
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-          </svg>
-        </GlassButton>
+          Let's Talk →
+        </a>
       </motion.div>
     </motion.div>
   );

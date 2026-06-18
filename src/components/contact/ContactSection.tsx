@@ -1,236 +1,106 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import SectionHeading from '../ui/SectionHeading';
 import GlassButton from '../ui/GlassButton';
 
 export default function ContactSection() {
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    company: '',
-    subject: 'General Inquiry',
-    message: ''
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormState({
-        name: '',
-        email: '',
-        company: '',
-        subject: 'General Inquiry',
-        message: ''
-      });
-    }, 3000);
-  };
-
   return (
-    <section id="contact" className="contact-section section">
-      {/* Decorative circle */}
-      <div 
+    <section id="contact" className="contact-section-new section">
+      {/* Decorative elements */}
+      <div
         style={{
-          position: 'absolute',
-          top: '-10%',
-          right: '-20%',
-          width: '800px',
-          height: '800px',
-          borderRadius: '50%',
-          border: '1px solid rgba(0, 102, 255, 0.03)',
-          pointerEvents: 'none',
-          zIndex: 0
+          position: 'absolute', top: '-10%', right: '-20%',
+          width: '800px', height: '800px', borderRadius: '50%',
+          border: '1px solid rgba(0, 102, 255, 0.04)',
+          pointerEvents: 'none', zIndex: 0,
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute', bottom: '-10%', left: '-15%',
+          width: '600px', height: '600px', borderRadius: '50%',
+          border: '1px solid rgba(123, 47, 190, 0.03)',
+          pointerEvents: 'none', zIndex: 0,
         }}
       />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="contact-inner">
-          
-          {/* Left Column Information */}
-          <div className="contact-info">
+        <motion.div
+          className="contact-luxury-card"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            boxShadow: 'var(--shadow-xl), 0 0 40px rgba(0, 102, 255, 0.05)'
+          }}
+        >
+          {/* Gradient top accent */}
+          <div className="contact-card-accent" />
+
+          <div className="contact-luxury-inner">
             <SectionHeading
-              overline="GET IN TOUCH"
-              title={"Let's Build the\nFuture Together"}
-              description="Whether you need autonomous workflow systems, AI-powered analytics, cloud infrastructure, or strategic consulting — our team is ready to transform your operations."
+              overline="LET'S CONNECT"
+              title="Let's Build Intelligent Systems Together"
+              description="Collaborating with businesses, educational institutions, organizations, communities and innovators worldwide."
+              centered
             />
 
-            <div className="contact-details">
-              <div className="contact-detail-item">
-                <div className="contact-detail-icon">📧</div>
-                <div className="contact-detail-text">
-                  <h5>Email Us</h5>
-                  <p>hello@thazio.com</p>
-                </div>
-              </div>
+            <div className="contact-buttons" style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <GlassButton
+                variant="neural"
+                href="mailto:info@thazio.com?subject=Consultation%20Request"
+                style={{ padding: '16px 36px', fontSize: 'var(--text-base)' }}
+              >
+                Schedule Consultation
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '6px' }}>
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </GlassButton>
 
-              <div className="contact-detail-item">
-                <div className="contact-detail-icon">📱</div>
-                <div className="contact-detail-text">
-                  <h5>Call Us</h5>
-                  <p>+1 (800) THAZIO-AI</p>
-                </div>
-              </div>
-
-              <div className="contact-detail-item">
-                <div className="contact-detail-icon">📍</div>
-                <div className="contact-detail-text">
-                  <h5>Headquarters</h5>
-                  <p>San Francisco, California</p>
-                </div>
-              </div>
-
-              <div className="contact-detail-item" style={{ marginTop: 'var(--space-6)' }}>
-                <div 
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 'var(--space-2)',
-                    fontSize: 'var(--text-xs)',
-                    fontFamily: 'var(--font-heading)',
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    color: 'var(--color-electric-blue)',
-                    background: 'var(--color-electric-blue-soft)',
-                    padding: '8px 16px',
-                    borderRadius: 'var(--radius-full)',
-                    border: '1px solid rgba(0, 102, 255, 0.15)',
-                  }}
-                >
-                  <span 
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      background: 'var(--color-electric-blue)',
-                      animation: 'pulse-glow 1s infinite'
-                    }}
-                  />
-                  Autonomous Systems: Online
-                </div>
-              </div>
+              <GlassButton
+                variant="secondary"
+                href="mailto:info@thazio.com"
+                style={{ padding: '16px 36px', fontSize: 'var(--text-base)' }}
+              >
+                Contact Us
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: '6px' }}>
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+                </svg>
+              </GlassButton>
             </div>
-          </div>
 
-          {/* Right Column Premium Form */}
-          <div className="contact-form-wrapper">
-            {submitted ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                style={{
-                  textAlign: 'center',
-                  padding: 'var(--space-12) 0',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: 'var(--space-4)'
+            {/* Email Address Link */}
+            <div style={{ marginTop: 'var(--space-6)', textAlign: 'center' }}>
+              <a 
+                href="mailto:info@thazio.com" 
+                style={{ 
+                  fontSize: 'var(--text-lg)', 
+                  fontWeight: 500,
+                  color: 'var(--color-electric-blue-light)', 
+                  transition: 'color 0.3s ease',
+                  textDecoration: 'none'
                 }}
               >
-                <div 
-                  style={{
-                    width: '64px',
-                    height: '64px',
-                    borderRadius: '50%',
-                    background: 'var(--color-electric-blue-soft)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '2rem'
-                  }}
-                >
-                  ✓
-                </div>
-                <h3 style={{ fontFamily: 'var(--font-heading)' }}>Message Sent</h3>
-                <p style={{ maxWidth: '300px', fontSize: 'var(--text-sm)' }}>
-                  Thank you for reaching out. Our team will get back to you within 24 hours.
-                </p>
-              </motion.div>
-            ) : (
-              <form className="contact-form" onSubmit={handleSubmit}>
-                <div className="form-row">
-                  <div className="form-group">
-                    <label className="form-label" htmlFor="contact-name">Full Name</label>
-                    <input
-                      className="form-input"
-                      type="text"
-                      id="contact-name"
-                      placeholder="John Smith"
-                      required
-                      autoComplete="name"
-                      value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label" htmlFor="contact-email">Email Address</label>
-                    <input
-                      className="form-input"
-                      type="email"
-                      id="contact-email"
-                      placeholder="john@company.com"
-                      required
-                      autoComplete="email"
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                    />
-                  </div>
-                </div>
+                info@thazio.com
+              </a>
+            </div>
 
-                <div className="form-group">
-                  <label className="form-label" htmlFor="contact-company">Company / Organization</label>
-                  <input
-                    className="form-input"
-                    type="text"
-                    id="contact-company"
-                    placeholder="Acme Corporation"
-                    required
-                    autoComplete="organization"
-                    value={formState.company}
-                    onChange={(e) => setFormState({ ...formState, company: e.target.value })}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label" htmlFor="contact-subject">How Can We Help?</label>
-                  <select
-                    className="form-select"
-                    id="contact-subject"
-                    value={formState.subject}
-                    onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                  >
-                    <option>General Inquiry</option>
-                    <option>AI & Automation Solutions</option>
-                    <option>Cloud Infrastructure</option>
-                    <option>Data & Analytics</option>
-                    <option>Strategic Consulting</option>
-                    <option>Partnership Opportunity</option>
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label" htmlFor="contact-message">Tell Us More</label>
-                  <textarea
-                    className="form-textarea"
-                    id="contact-message"
-                    placeholder="Describe your project, challenges, or goals..."
-                    required
-                    value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                  />
-                </div>
-
-                <GlassButton variant="neural" className="w-full" style={{ width: '100%', padding: '16px' }}>
-                  Send Message
-                </GlassButton>
-              </form>
-            )}
+            {/* Status indicator */}
+            <motion.div
+              className="contact-status"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              <span className="contact-status-dot" />
+              Available for new projects
+            </motion.div>
           </div>
-
-        </div>
+        </motion.div>
       </div>
     </section>
   );
