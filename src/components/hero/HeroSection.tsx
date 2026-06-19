@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useMotionTemplate } from 'motion/react';
 import HeroContent from './HeroContent';
+import NeuralCanvasBg from './NeuralCanvasBg';
 
 interface HeroSectionProps {
   active?: boolean;
@@ -62,22 +63,26 @@ export default function HeroSection({ active = true }: HeroSectionProps) {
       onTouchEnd={handleTouchEnd}
       style={{ position: 'relative', overflow: 'hidden' }}
     >
-      {/* Base Dotted World Map Background (faint) */}
-      <div
-        className="hero-map-bg"
-        style={{
-          backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/world_map_dots.png')`
-        }}
-      />
+      {/* Interactive Neural Constellation Background Canvas */}
+      <NeuralCanvasBg />
 
-      {/* Interactive Glowing Spotlight Map Overlay (follows cursor) */}
+      {/* Interactive Glowing Spotlight Overlay (follows cursor) */}
       <motion.div
-        className="hero-map-glow"
+        className="hero-spotlight-glow"
         style={{
-          backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/world_map_dots.png')`,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'radial-gradient(circle at center, rgba(0, 212, 255, 0.12) 0%, rgba(123, 47, 190, 0.08) 45%, rgba(255, 0, 127, 0.03) 75%, transparent 100%)',
           WebkitMaskImage: maskImage,
           maskImage: maskImage,
-          opacity: isHovered ? 0.35 : 0,
+          opacity: isHovered ? 0.75 : 0,
+          pointerEvents: 'none',
+          zIndex: 3,
+          mixBlendMode: 'screen',
+          transition: 'opacity 0.5s ease',
         }}
       />
 

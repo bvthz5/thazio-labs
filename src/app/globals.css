@@ -848,36 +848,7 @@ img {
   background: radial-gradient(circle at 70% 35%, #2E224A 0%, var(--color-charcoal) 60%, var(--color-obsidian) 100%);
   padding-top: var(--nav-height);
 }
-
-.hero-map-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  mix-blend-mode: screen;
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.hero-map-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  mix-blend-mode: screen;
-  opacity: 0;
-  filter: drop-shadow(0 0 6px #9b5fde) drop-shadow(0 0 12px #ff0055);
-  pointer-events: none;
-  z-index: 4;
-  transition: opacity 0.5s ease;
-}
+/* Interactive Neural Constellation Background Canvas replaced hero-map-bg and hero-map-glow */
 
 .hero-inner {
   display: flex;
