@@ -60,7 +60,7 @@ interface HeroContentProps {
 }
 
 export default function HeroContent({ active = true }: HeroContentProps) {
-  const handleScrollTo = (e: React.MouseEvent<HTMLButtonElement & HTMLAnchorElement>, targetId: string) => {
+  const handleScrollTo = (e: React.MouseEvent<HTMLElement>, targetId: string) => {
     e.preventDefault();
     const element = document.getElementById(targetId);
     if (element) {
@@ -87,51 +87,53 @@ export default function HeroContent({ active = true }: HeroContentProps) {
       variants={containerVariants}
       initial="hidden"
       animate={active ? "visible" : "hidden"}
-      style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto' }}
+      style={{ maxWidth: '900px' }}
     >
-      <h1 className="hero-title" style={{ margin: 0, padding: 0 }}>
-        {/* Line 1: Data Driven, */}
-        <motion.span 
-          className="hero-title-line" 
-          style={{ display: 'block', marginBottom: '8px' }}
-          initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
-          animate={active ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        >
-          Data Driven,
-        </motion.span>
-
-        {/* Line 2: AI Powered */}
-        <motion.span 
-          className="hero-title-line gradient" 
-          style={{ display: 'block', marginBottom: '8px' }}
-          initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
-          animate={active ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
-        >
-          AI Powered
-        </motion.span>
-
-        {/* Line 3: Digital Transformation. */}
-        <span className="hero-title-line" style={{ display: 'block', marginBottom: '24px', overflow: 'hidden' }}>
-          <motion.span
-            style={{ display: 'block' }}
-            initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
-            animate={active ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.34 }}
-          >
-            Digital Transformation.
-          </motion.span>
+      <motion.h1 
+        className="hero-title" 
+        style={{ margin: 0, padding: 0 }}
+        variants={lineContainerVariants}
+        initial="hidden"
+        animate={active ? "visible" : "hidden"}
+      >
+        <span className="hero-title-line" style={{ display: 'block', marginBottom: '8px' }}>
+          {"Building Intelligent Systems".split('').map((char, index) => (
+            <motion.span key={index} variants={characterVariants} style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}>
+              {char}
+            </motion.span>
+          ))}
         </span>
-      </h1>
+        <span className="hero-title-line gradient" style={{ display: 'block', marginBottom: '24px' }}>
+          {"For Modern Enterprises".split('').map((char, index) => (
+            <motion.span key={index} variants={characterVariants} style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}>
+              {char}
+            </motion.span>
+          ))}
+        </span>
+      </motion.h1>
+
+      <motion.p
+        className="hero-subtitle"
+        variants={itemVariants}
+        initial="hidden"
+        animate={active ? "visible" : "hidden"}
+        style={{ 
+          fontSize: 'var(--text-lg)', 
+          color: 'rgba(255, 255, 255, 0.85)', 
+          maxWidth: '650px', 
+          lineHeight: '1.7',
+          marginBottom: 'var(--space-10)'
+        }}
+      >
+        Software, AI, and automation solutions designed for innovation, efficiency, and sustainable growth.
+      </motion.p>
 
       {/* Let's Talk CTA button */}
       <motion.div 
         className="hero-buttons" 
-        style={{ marginTop: 'var(--space-8)', justifyContent: 'center' }}
-        initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
-        animate={active ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
+        variants={itemVariants}
+        initial="hidden"
+        animate={active ? "visible" : "hidden"}
       >
         <a
           href="#contact"

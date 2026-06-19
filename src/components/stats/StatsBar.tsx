@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'motion/react';
 import { STATS } from '@/lib/constants';
 import SectionHeading from '../ui/SectionHeading';
+import LightBackgroundAnimation from '../ui/LightBackgroundAnimation';
 
 interface CounterProps {
   value: string;
@@ -59,28 +60,28 @@ function Counter({ value, duration = 2 }: CounterProps) {
 
 export default function StatsBar() {
   return (
-    <section className="stats-section section section-dark" id="statistics">
-      <div className="container">
+    <section className="stats-section section" id="statistics" style={{ background: '#FFFFFF', position: 'relative' }}>
+      <LightBackgroundAnimation />
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <SectionHeading
           overline="STATISTICS"
           title="By The Numbers"
           centered
-          light
         />
         <div className="stats-grid" style={{ marginTop: 'var(--space-10)' }}>
           {STATS.map((stat, i) => (
             <motion.div 
               key={i} 
               className="stat-item"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="stat-number text-gradient">
                 <Counter value={stat.number} />
               </div>
-              <div className="stat-label">{stat.label}</div>
+              <div className="stat-label" style={{ color: '#4B5563', fontWeight: 500 }}>{stat.label}</div>
             </motion.div>
           ))}
         </div>

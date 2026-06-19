@@ -31,8 +31,8 @@ export default function LocationsSection() {
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <SectionHeading
           overline="LOCATIONS"
-          title={"Headquartered in India.\nConnected Globally."}
-          description="Building world-class technology from India, collaborating with teams and clients across the globe."
+          title={"Global Scale.\nLocal Precision."}
+          description="Architecting world-class infrastructure from our global operations center, synchronizing seamlessly with distributed enterprise teams."
           centered
           light
         />
@@ -41,10 +41,10 @@ export default function LocationsSection() {
           {/* Active Locations */}
           <motion.div
             className="location-card location-card-active glass-card-dark"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="location-pulse" />
             <div className="location-icon">
@@ -59,10 +59,10 @@ export default function LocationsSection() {
 
           <motion.div
             className="location-card location-card-active glass-card-dark"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="location-pulse" />
             <div className="location-icon">
@@ -81,10 +81,10 @@ export default function LocationsSection() {
             <motion.div
               key={loc.name}
               className="location-card location-card-future glass-card-dark"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 0.3 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="location-icon location-icon-future">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

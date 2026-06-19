@@ -4,42 +4,34 @@ import React from 'react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { SERVICES } from '@/lib/constants';
+import LightBackgroundAnimation from '../ui/LightBackgroundAnimation';
 
 export default function ServicesSection() {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const CARD_COLORS = [
+    '#E3ECFF', // Deeper Light Blue/Indigo
+    '#EFE6FF', // Deeper Light Purple
+    '#FFEDE3', // Deeper Light Peach
+    '#E3FFF0', // Deeper Light Mint
+    '#E3F7FF', // Deeper Light Cyan
+    '#FFE6E6', // Deeper Light Rose
+  ];
 
   return (
-    <section id="services" className="services-section section section-dark" style={{ background: '#070A13', padding: 'var(--space-32) 0' }}>
-      {/* Decorative gradient backdrops */}
-      <div
-        style={{
-          position: 'absolute', top: '10%', left: '-5%',
-          width: '500px', height: '500px',
-          background: 'radial-gradient(circle, rgba(0, 212, 255, 0.02), transparent 70%)',
-          pointerEvents: 'none', zIndex: 0,
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute', bottom: '10%', right: '-5%',
-          width: '600px', height: '600px',
-          background: 'radial-gradient(circle, rgba(123, 47, 190, 0.02), transparent 70%)',
-          pointerEvents: 'none', zIndex: 0,
-        }}
-      />
-
+    <section id="services" className="services-section section" style={{ background: '#FFFFFF', padding: 'var(--space-32) 0', position: 'relative' }}>
+      <LightBackgroundAnimation />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Section Heading matching Screenshot 5 */}
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-24)' }}>
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             style={{ 
               fontSize: 'clamp(2rem, 1.5rem + 3vw, 3.8rem)', 
               fontWeight: 800,
-              background: 'linear-gradient(90deg, #00D4FF, #0066FF)',
+              background: 'linear-gradient(90deg, #0055FF, #0022AA)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -48,22 +40,22 @@ export default function ServicesSection() {
               lineHeight: 1.15
             }}
           >
-            Your Path to Digital Advantage
+            Enterprise Architecture at Scale
           </motion.h2>
           <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{ 
               fontSize: 'var(--text-lg)', 
-              color: 'var(--color-mist)', 
+              color: '#4B5563', 
               fontWeight: 500,
               maxWidth: '750px',
               margin: '0 auto'
             }}
           >
-            Strategy, Data, AI and Cloud Solutions that Scale Your Business.
+            Intelligent systems and proprietary architectures designed for global impact.
           </motion.p>
         </div>
 
@@ -74,30 +66,32 @@ export default function ServicesSection() {
             return (
               <motion.div
                 key={service.slug}
-                initial={{ opacity: 0, x: isEven ? -40 : 40, y: 20 }}
-                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                initial={{ opacity: 0, y: 40, filter: 'blur(5px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                whileHover="hover"
+                transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
                 variants={{
                   initial: {},
                   hover: {}
                 }}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.02)',
-                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                  background: CARD_COLORS[index % CARD_COLORS.length],
+                  border: '2px solid #FFFFFF',
                   borderRadius: '24px',
                   padding: 'var(--space-8)',
-                  position: 'relative',
+                  position: 'sticky',
+                  top: `calc(120px + ${index * 40}px)`,
                   overflow: 'hidden',
                   cursor: 'pointer',
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)',
+                  zIndex: index + 10,
                 }}
                 whileHover={{
                   y: -8,
                   scale: 1.015,
-                  borderColor: 'rgba(0, 102, 255, 0.25)',
-                  boxShadow: '0 25px 50px rgba(0, 0, 0, 0.45)',
-                  background: 'rgba(255, 255, 255, 0.03)',
+                  borderColor: 'rgba(0, 102, 255, 0.15)',
+                  boxShadow: '0 25px 50px rgba(0, 0, 0, 0.1)',
+                  filter: 'brightness(0.98)',
                   transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
                 }}
                 className={`service-row-card ${!isEven ? 'reverse' : ''}`}
@@ -111,7 +105,7 @@ export default function ServicesSection() {
                     overflow: 'hidden',
                     aspectRatio: '16/10',
                     width: '100%',
-                    border: '1px solid rgba(255, 255, 255, 0.08)'
+                    border: '1px solid rgba(0, 0, 0, 0.05)'
                   }}
                   className="service-card-image-wrapper"
                 >
@@ -134,7 +128,7 @@ export default function ServicesSection() {
                   <div 
                     style={{
                       position: 'absolute', inset: 0,
-                      background: 'linear-gradient(180deg, transparent 60%, rgba(7, 10, 19, 0.4) 100%)',
+                      background: 'linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.1) 100%)',
                       pointerEvents: 'none'
                     }}
                   />
@@ -155,7 +149,7 @@ export default function ServicesSection() {
                     style={{ 
                       fontSize: 'var(--text-2xl)', 
                       fontWeight: 700, 
-                      color: 'var(--color-white)',
+                      color: '#070A13',
                       marginBottom: 'var(--space-4)'
                     }}
                   >
@@ -164,7 +158,7 @@ export default function ServicesSection() {
                   <p 
                     style={{ 
                       fontSize: 'var(--text-base)', 
-                      color: 'rgba(255, 255, 255, 0.65)',
+                      color: '#4B5563',
                       lineHeight: 1.8,
                       marginBottom: 'var(--space-6)',
                       fontWeight: 400
@@ -180,7 +174,7 @@ export default function ServicesSection() {
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '6px',
-                        color: 'var(--color-white)',
+                        color: '#0066FF',
                         fontSize: 'var(--text-sm)',
                         fontWeight: 600,
                         textDecoration: 'none',
@@ -188,12 +182,12 @@ export default function ServicesSection() {
                       }}
                       className="service-card-link"
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.color = 'var(--color-soft-cyan)';
+                        e.currentTarget.style.color = '#0044CC';
                         const arrow = e.currentTarget.querySelector('span');
                         if (arrow) arrow.style.transform = 'translateX(4px)';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.color = 'var(--color-white)';
+                        e.currentTarget.style.color = '#0066FF';
                         const arrow = e.currentTarget.querySelector('span');
                         if (arrow) arrow.style.transform = 'none';
                       }}

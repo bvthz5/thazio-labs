@@ -4,9 +4,9 @@
    ═══════════════════════════════════════════════════════════════ */
 
 export const SITE_NAME = 'THAZIO';
-export const SITE_TAGLINE = 'AI-First Engineering & Autonomous Systems';
+export const SITE_TAGLINE = 'Intelligent Systems For Modern Enterprises';
 export const SITE_DESCRIPTION =
-  'Thazio Labs is an AI-first engineering company building intelligent software, autonomous systems, and data-driven solutions for businesses, institutions, and governments worldwide.';
+  'Thazio Labs is a premier AI-first engineering firm architecting intelligent software, autonomous systems, and data-driven solutions for global enterprises, institutions, and governments.';
 
 /* ─── Navigation ─────────────────────────────────────────────── */
 
@@ -24,151 +24,42 @@ export const SERVICES = [
   {
     slug: 'digital-software',
     icon: 'code',
-    title: 'Digital & Software',
-    description:
-      'We design, build, and modernize custom applications and digital platforms. This includes enterprise product deployments, full-lifecycle software development, and quality engineering to ensure your product is scalable and secure leading to competitive advantage.',
+    title: 'Enterprise Software Engineering',
+    description: 'Architecting scalable, high-performance digital platforms and custom applications designed to accelerate operational scale and secure competitive dominance.',
     image: '/images/services/digital_software.png',
-    detail: {
-      heroSubtitle:
-        'Building scalable, production-ready software platforms and digital applications that power modern organizations.',
-      capabilities: [
-        { title: 'Enterprise Product Deployments', description: 'Deploying full-stack digital products built for scale, performance, and long-term utility.' },
-        { title: 'Software Development', description: 'Full-lifecycle software development using modern front-end and back-end frameworks.' },
-        { title: 'Quality Engineering', description: 'Rigorous automated testing, security checks, and continuous optimization loops.' },
-        { title: 'Web Applications', description: 'Dynamic web platforms built with Next.js, React, Node.js, and TypeScript.' },
-        { title: 'Mobile Solutions', description: 'Cross-platform native applications optimized for high-performance iOS and Android deployments.' },
-        { title: 'API Integrations', description: 'Secure, reliable RESTful and GraphQL APIs built for maximum interoperability.' },
-      ],
-      technologies: ['React', 'Next.js', 'Node.js', 'Python', 'TypeScript', 'PostgreSQL', 'MongoDB', 'Docker', 'Kubernetes', 'REST APIs'],
-      process: [
-        { step: 'Discovery', description: 'Mapping technical specifications, user personas, and commercial objectives.' },
-        { step: 'Architecture', description: 'Designing modular, highly available database schemas and system topographies.' },
-        { step: 'Development', description: 'Iterative development sprints with automated CI/CD code verification pipelines.' },
-        { step: 'Deployment', description: 'Deploying production builds with automated logging, monitoring, and staging.' },
-      ],
-      faq: [
-        { question: 'What is your software development methodology?', answer: 'We follow an agile development lifecycle with continuous deployment loops, keeping stakeholders involved in weekly sprint reviews.' },
-        { question: 'Do you help migrate legacy software platforms?', answer: 'Yes, we specialize in refactoring and containerizing legacy applications, converting them into modern microservice architectures.' },
-      ],
-    },
+    detail: { heroSubtitle: '', capabilities: [], technologies: [], process: [], faq: [] },
   },
   {
     slug: 'ai-data-analytics',
     icon: 'brain',
-    title: 'AI, Data and Analytics',
-    description:
-      'Deploying generative AI solutions, customized machine learning pipelines, and predictive dashboards. Turn unstructured data into operational intelligence.',
+    title: 'Artificial Intelligence & Analytics',
+    description: 'Deploying generative AI models, proprietary machine learning pipelines, and predictive analytics to transform unstructured data into actionable foresight.',
     image: '/images/services/ai_data.png',
-    detail: {
-      heroSubtitle:
-        'Intelligent systems that learn, reason, and parse unstructured data — transforming business telemetry into actionable foresight.',
-      capabilities: [
-        { title: 'Generative AI Integrations', description: 'Custom Large Language Model (LLM) workflows, semantic search engines, and RAG architectures.' },
-        { title: 'Machine Learning Pipelines', description: 'Designing, training, fine-tuning, and evaluating specialized models for specific commercial datasets.' },
-        { title: 'Predictive Analytics', description: 'Leveraging historical indicators to forecast market demand, customer churn, and anomalies.' },
-        { title: 'Data Lakehouse Setup', description: 'Consolidating operational silos into unified, high-speed analytical storage.' },
-        { title: 'Business Intelligence Dashboards', description: 'Designing clean, interactive data telemetry in Metabase, PowerBI, and custom interfaces.' },
-      ],
-      technologies: ['Python', 'PyTorch', 'LangChain', 'OpenAI', 'Hugging Face', 'Snowflake', 'BigQuery', 'dbt', 'Vector Databases'],
-      process: [
-        { step: 'Data Audit', description: 'Evaluating existing data sources, schemas, latencies, and data quality.' },
-        { step: 'Model Pipeline Design', description: 'Structuring RAG database routing, prompt templates, and evaluation guardrails.' },
-        { step: 'Model Fine-Tuning', description: 'Training models on specific domains to ensure contextual accuracy and limit hallucinations.' },
-        { step: 'Dashboard Integration', description: 'Exposing parsed data models via clean analytical dashboards for department heads.' },
-      ],
-      faq: [
-        { question: 'How do you guarantee model accuracy and prevent hallucinations?', answer: 'We build strict Retrieval-Augmented Generation (RAG) vector lookup pipelines that route requests only to verified documents.' },
-        { question: 'Can we build custom AI models with limited datasets?', answer: 'Yes, we employ transfer learning and few-shot classification techniques to fine-tune foundation models with small amounts of clean data.' },
-      ],
-    },
+    detail: { heroSubtitle: '', capabilities: [], technologies: [], process: [], faq: [] },
   },
   {
     slug: 'cloud',
     icon: 'cloud',
-    title: 'Cloud',
-    description:
-      'Transitioning infrastructures to secure, elastic cloud environments with automated DevOps, zero-trust configurations, and 24/7 telemetry monitoring.',
+    title: 'Cloud Infrastructure & Security',
+    description: 'Migrating and optimizing legacy systems into elastic, zero-trust cloud environments with automated DevOps and 24/7 telemetry monitoring.',
     image: '/images/services/cloud.png',
-    detail: {
-      heroSubtitle:
-        'Reliable cloud architecture, automated CI/CD deployments, and zero-trust configuration setups.',
-      capabilities: [
-        { title: 'Cloud Infrastructure Migration', description: 'Seamless migration of legacy system workloads to AWS, Google Cloud, or Microsoft Azure.' },
-        { title: 'Infrastructure as Code (IaC)', description: 'Representing, scaling, and managing environments cleanly using Terraform scripts.' },
-        { title: 'CI/CD Pipeline Automation', description: 'Building automated testing, building, and deployment cycles with GitHub Actions.' },
-        { title: 'Container Orchestration', description: 'Deploying highly portable applications using Docker containers and Kubernetes clusters.' },
-        { title: 'Telemetry Observability', description: 'Setting up centralized logging, alerting, and metrics with Prometheus and Grafana.' },
-      ],
-      technologies: ['AWS', 'Google Cloud', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'Prometheus', 'Grafana'],
-      process: [
-        { step: 'Assessment', description: 'Evaluating current compute workloads, memory allocations, and monthly costs.' },
-        { step: 'Architecture Blueprint', description: 'Designing secure VPC networks, autoscaling groups, and failovers.' },
-        { step: 'Automation Setup', description: 'Coding IaC scripts and continuous integration deployment templates.' },
-        { step: 'Migration & Monitoring', description: 'Deploying workloads with zero downtime and configuration telemetry alerts.' },
-      ],
-      faq: [
-        { question: 'Which cloud providers do you support?', answer: 'We manage and optimize cloud architectures across AWS, Google Cloud Platform (GCP), and Microsoft Azure.' },
-        { question: 'How do you handle container scaling?', answer: 'We set up auto-scaling Kubernetes nodes that scale compute power dynamically based on requests or traffic peaks.' },
-      ],
-    },
+    detail: { heroSubtitle: '', capabilities: [], technologies: [], process: [], faq: [] },
   },
   {
     slug: 'consulting',
     icon: 'chart',
-    title: 'Consulting',
-    description:
-      'Providing strategic technology consulting, transformation mapping, architecture design, and workflow assessments to future-proof operations.',
+    title: 'Strategic Technology Consulting',
+    description: 'Providing executive-level transformation roadmaps, enterprise architecture design, and process optimization to future-proof core operations.',
     image: '/images/services/consulting.png',
-    detail: {
-      heroSubtitle:
-        'Future-proofing your technology strategy and digital frameworks through comprehensive consulting assessments.',
-      capabilities: [
-        { title: 'Digital Transformation Mapping', description: 'Formulating step-by-step roadmaps to guide organizations from manual workflows to digitized scale.' },
-        { title: 'Technology Audits', description: 'Evaluating database configurations, security policies, frameworks, and logic models.' },
-        { title: 'Architecture Design', description: 'Designing modular, highly interoperable system architectures designed to handle growing scale.' },
-        { title: 'Process Optimization', description: 'Analyzing operational bottlenecks to identify manual steps ready for automation.' },
-      ],
-      technologies: ['System Architecture Design', 'Workflow Mapping Tools', 'Agile Frameworks', 'ROI Modeling', 'Security Assessments'],
-      process: [
-        { step: 'Information Gathering', description: 'Conducting stakeholder interviews and reviewing technical documentation.' },
-        { step: 'System Audit', description: 'Analyzing performance metrics, code structures, dependencies, and database speeds.' },
-        { step: 'Strategy Mapping', description: 'Drafting concrete recommendations, cost estimates, and execution roadmaps.' },
-        { step: 'Handover & Support', description: 'Reviewing blueprints with engineering leads and providing kickoff consulting.' },
-      ],
-      faq: [
-        { question: 'What deliverables are included in a technology consulting engagement?', answer: 'We provide detailed architecture diagrams, software stack recommendations, cost models, and execution blueprints.' },
-        { question: 'Do you help execute the blueprints you design?', answer: 'Yes, our software engineering and AI specialist teams can execute the recommended transformation plans as part of a long-term partnership.' },
-      ],
-    },
+    detail: { heroSubtitle: '', capabilities: [], technologies: [], process: [], faq: [] },
   },
   {
     slug: 'global-capability-centers',
     icon: 'automation',
     title: 'Global Capability Centers',
-    description:
-      'Setting up dedicated global delivery and competency centers to optimize distributed workflows, operational scale, and specialized talent pools.',
+    description: 'Establishing dedicated, high-performance global delivery teams to scale engineering bandwidth, operational resilience, and specialized talent.',
     image: '/images/services/gcc.png',
-    detail: {
-      heroSubtitle:
-        'Establishing highly specialized global delivery and delivery centers that expand your technical scale.',
-      capabilities: [
-        { title: 'Distributed Workflow Setup', description: 'Structuring communication, coordination, and code protocols across remote time zones.' },
-        { title: 'Dedicated Competency Centers', description: 'Assembling specialized engineer teams focused on core operational modules (AI, Cloud, Security).' },
-        { title: 'Operational Standardisation', description: 'Enforcing consistent coding, security, and integration practices globally.' },
-        { title: 'Strategic Scale', description: 'Expanding system bandwidth, support coverage, and engineering speed.' },
-      ],
-      technologies: ['Global Collaboration tools', 'Centralized IAM Policy', 'Global delivery models', 'Unified Git Orchestrations'],
-      process: [
-        { step: 'Resource Scoping', description: 'Mapping required skillsets, engineering numbers, and operational modules.' },
-        { step: 'Workflow Design', description: 'Establishing security scopes, communication loops, and handoff protocols.' },
-        { step: 'Team Assembly', description: 'Onboarding and training specialized engineers on your platform codebase.' },
-        { step: 'Operations Scaling', description: 'Managing daily engineering output, sprint reviews, and deployment cycles.' },
-      ],
-      faq: [
-        { question: 'What is a Global Capability Center (GCC)?', answer: 'A GCC is a dedicated team of specialized engineers operating from a cost-efficient talent pool, functioning as a direct extension of your core technology team.' },
-        { question: 'How do you ensure IP protection and security in a GCC?', answer: 'We set up secure remote desktops, enforce strict multi-factor authentication, and operate within secure private cloud nodes.' },
-      ],
-    },
+    detail: { heroSubtitle: '', capabilities: [], technologies: [], process: [], faq: [] },
   },
 ] as const;
 
@@ -177,18 +68,18 @@ export const SERVICES = [
 export const WHY_CHOOSE_US = [
   {
     icon: 'excellence',
-    title: 'Proven Legacy of Engineering Excellence and Customer Commitment',
-    description: 'For years, Thazio Labs has been a dedicated partner guiding complex digital transformation. Our stability and insights are backed by an unwavering commitment to our clients\' success. This ensures that every solution we deliver is innovative, reliable, and perfectly tailored to drive your long-term growth.',
+    title: 'A Legacy of Engineering Excellence',
+    description: 'We partner with global organizations to navigate complex digital transformations. Our stability and strategic foresight ensure that every solution is innovative, secure, and perfectly tailored for long-term growth.',
   },
   {
     icon: 'execution',
-    title: 'Expertise, Execution, and Excellence',
-    description: 'We blend deep technical expertise in AI, cloud architectures, and digital systems with meticulous planning and seamless execution in every project. This focus is sustained by a culture of continuous improvement, maintaining high standards for unmatched quality and top-tier data security.',
+    title: 'Precision in Execution',
+    description: 'We fuse deep technical expertise in AI and cloud architectures with meticulous deployment strategies. Our relentless focus on quality guarantees high-performance systems and top-tier data security.',
   },
   {
     icon: 'teams',
     title: 'High-Performance Autonomous Teams',
-    description: 'Our success is built on the strength and dedication of our people. We live by our core value of Teamwork, ensuring tight collaboration both internally and externally with your organization. With mutual dedication and high standards, we guarantee the technical depth and cohesive delivery needed for your most critical projects.',
+    description: 'Our foundation is built on elite, autonomous engineering squads. We integrate seamlessly with your internal operations, providing the technical depth required for your most mission-critical initiatives.',
   },
 ] as const;
 
@@ -198,122 +89,58 @@ export const INDUSTRIES = [
   {
     slug: 'retail',
     title: 'Retail',
-    description: 'Customer engagement platforms, intelligent inventory systems, and shopping analytics.',
+    description: 'Intelligent inventory forecasting, unified data dashboards, and automated supply chain telemetry.',
     gradient: 'linear-gradient(135deg, #0066FF20, #7B2FBE30, #00D4FF20)',
-    detail: {
-      overview: 'Empowering retail brands with unified data dashboards and automated inventory forecasting engines.',
-      challenges: ['Inventory data synchronization gaps', 'Manual customer segmentation', 'High supply chain friction'],
-      solutions: ['AI-powered stock predictions', 'Real-time inventory mapping', 'Personalized shopping analytics'],
-      benefits: ['Reduced stockouts by up to 45%', 'Higher retail operational bandwidth'],
-      faq: [
-        { question: 'Do you support multi-store inventory synchronization?', answer: 'Yes, we integrate with major POS systems and update inventories in real-time across physical and digital storefronts.' }
-      ]
-    },
+    detail: { overview: '', challenges: [], solutions: [], benefits: [], faq: [] },
   },
   {
     slug: 'advertising-media',
     title: 'Advertising & Media',
-    description: 'Automated ad placement engines, audience analytic dashboards, and content platforms.',
+    description: 'Automated placement engines, audience analytics, and high-bandwidth media delivery platforms.',
     gradient: 'linear-gradient(135deg, #7B2FBE20, #00D4FF30, #0066FF20)',
-    detail: {
-      overview: 'Transforming content delivery pipelines and optimizing audience targeting telemetry systems.',
-      challenges: ['Audience fragmentation', 'Complex manual ad schedules', 'Data transparency bottlenecks'],
-      solutions: ['Automated ad rendering logic', 'Audience engagement databases', 'Real-time streaming portals'],
-      benefits: ['Increased ad conversions by over 30%', 'Frictionless content publishing loops'],
-      faq: [
-        { question: 'Can the content platforms handle high-bandwidth video streams?', answer: 'Yes, we utilize globally distributed CDN edge routing to ensure low-latency media delivery.' }
-      ]
-    },
+    detail: { overview: '', challenges: [], solutions: [], benefits: [], faq: [] },
   },
   {
     slug: 'education',
     title: 'Education',
-    description: 'Digital classrooms, academic management platforms, and assessment automations.',
+    description: 'Scalable academic management platforms, automated assessment tools, and digital campus infrastructure.',
     gradient: 'linear-gradient(135deg, #00D4FF20, #0066FF30, #7B2FBE20)',
-    detail: {
-      overview: 'Equipping academic institutions with clean digital portals to simplify scheduling, evaluation, and operations.',
-      challenges: ['Manual exam seating logistics', 'Fragmented student file registries', 'High administrative overhead'],
-      solutions: ['Automated invigilation schedulers', 'Student records databases', 'Interactive learning portals'],
-      benefits: ['Administrative labor reduced by over 60%', 'Accurate digital examination scheduling'],
-      faq: [
-        { question: 'How does the AI grading system ensure accuracy?', answer: 'We implement model validation loops alongside human verification gates to ensure grading matches institutional standards.' }
-      ]
-    },
+    detail: { overview: '', challenges: [], solutions: [], benefits: [], faq: [] },
   },
   {
     slug: 'telecommunication',
     title: 'Telecommunication',
-    description: 'Network telemetry monitoring, customer portals, and signal optimization models.',
+    description: 'High-availability network monitoring, automated billing pipelines, and predictive churn models.',
     gradient: 'linear-gradient(135deg, #0066FF25, #00D4FF30, #7B2FBE15)',
-    detail: {
-      overview: 'Building secure, high-availability customer dashboards and network performance logging systems.',
-      challenges: ['Real-time signal fluctuations', 'Legacy billing integration gaps', 'High customer churn indicators'],
-      solutions: ['Network status monitoring dashboards', 'Automated customer billing pipelines', 'Churn predictor data models'],
-      benefits: ['Uptime monitoring accuracy increased to 99.9%', 'Reduced client friction points'],
-      faq: [
-        { question: 'Can you integrate with legacy billing systems?', answer: 'Yes, we specialize in building custom API connectors that synchronize billing databases securely.' }
-      ]
-    },
+    detail: { overview: '', challenges: [], solutions: [], benefits: [], faq: [] },
   },
   {
     slug: 'healthcare',
     title: 'Healthcare',
-    description: 'Patient records platforms, diagnostic support models, and inventory logs.',
+    description: 'HIPAA-compliant data architectures, unified patient records, and predictive diagnostic models.',
     gradient: 'linear-gradient(135deg, #7B2FBE25, #0066FF30, #00D4FF15)',
-    detail: {
-      overview: 'Modernizing hospital database operations with HIPAA-compliant logging architectures and user panels.',
-      challenges: ['HIPAA compliance recording gaps', 'Fragmented EHR data transfer', 'Critical equipment downtime'],
-      solutions: ['Secure Patient Portal systems', 'Unified patient data pipelines', 'Medical equipment monitoring models'],
-      benefits: ['Fast patient records indexing', 'HIPAA-grade data safety standards'],
-      faq: [
-        { question: 'How do you guarantee patient data security?', answer: 'All data is encrypted in transit and at rest, utilizing strict role-based access control policies.' }
-      ]
-    },
+    detail: { overview: '', challenges: [], solutions: [], benefits: [], faq: [] },
   },
   {
     slug: 'e-commerce',
     title: 'E-commerce',
-    description: 'Bespoke web storefronts, recommendation engines, and logistics tracking solutions.',
+    description: 'High-conversion web storefronts, real-time supply chain updates, and dynamic recommendation engines.',
     gradient: 'linear-gradient(135deg, #00D4FF25, #7B2FBE30, #0066FF15)',
-    detail: {
-      overview: 'Building robust, fast storefront applications with personalized recommendation engines to maximize conversions.',
-      challenges: ['Slow storefront loading latencies', 'Cart abandonment peaks', 'Inventory mismatching across channels'],
-      solutions: ['Next.js server-side rendered storefronts', 'Product recommender models', 'Integrated supply chain updates'],
-      benefits: ['Storefront speeds improved by 400%', 'Instant cart recovery workflows'],
-      faq: [
-        { question: 'Do you support multi-channel integrations?', answer: 'Yes, we sync inventory databases across Shopify, Amazon, and custom back-ends.' }
-      ]
-    },
+    detail: { overview: '', challenges: [], solutions: [], benefits: [], faq: [] },
   },
   {
     slug: 'finance',
     title: 'Finance',
-    description: 'Secure transaction platforms, risk analytics dashboards, and compliance logs.',
+    description: 'Immutable ledger audits, real-time fraud detection, and secure regulatory compliance reporting.',
     gradient: 'linear-gradient(135deg, #0066FF20, #00D4FF25, #7B2FBE30)',
-    detail: {
-      overview: 'Constructing robust fintech databases, real-time fraud dashboards, and audit-ready reporting frameworks.',
-      challenges: ['Fraud risk events', 'Regulatory compliance recording', 'Manual ledger audits'],
-      solutions: ['Real-time fraud alerts', 'Automated regulatory reporting', 'Secure database audits'],
-      benefits: ['Compliance audit timelines cut in half', 'Real-time alert indicators'],
-      faq: [
-        { question: 'How do you ensure audit transparency?', answer: 'We build read-only immutable system logs that capture every transaction state change.' }
-      ]
-    },
+    detail: { overview: '', challenges: [], solutions: [], benefits: [], faq: [] },
   },
   {
     slug: 'utilities',
     title: 'Utilities',
-    description: 'Grid performance models, customer billing portals, and maintenance tracking.',
+    description: 'Grid telemetry pipelines, load-prediction algorithms, and automated resource allocation models.',
     gradient: 'linear-gradient(135deg, #7B2FBE20, #0066FF25, #00D4FF30)',
-    detail: {
-      overview: 'Optimizing resource allocation and managing grids through real-time telemetry pipelines.',
-      challenges: ['Grid overload peaks', 'Manual scheduling of maintenance crews', 'Slow customer billing reconciliations'],
-      solutions: ['Load-prediction algorithms', 'Field technician dispatch systems', 'Automated meter reading databases'],
-      benefits: ['Reduced technician dispatch delays by 35%', 'Improved load forecast accuracies'],
-      faq: [
-        { question: 'Do you support real-time smart meter syncing?', answer: 'Yes, we write high-throughput ingestion pipelines using Apache Kafka to sync smart meters.' }
-      ]
-    },
+    detail: { overview: '', challenges: [], solutions: [], benefits: [], faq: [] },
   },
 ] as const;
 
@@ -346,11 +173,11 @@ export const CASE_STUDIES = [
 /* ─── Stats ──────────────────────────────────────────────────── */
 
 export const STATS = [
-  { number: '10+', label: 'Projects' },
-  { number: '1+', label: 'Years Building' },
-  { number: '5+', label: 'Technology Domains' },
-  { number: '100%', label: 'Custom Solutions' },
-  { number: '24/7', label: 'Continuous Innovation' },
+  { number: '50+', label: 'Enterprise Deployments' },
+  { number: '10+', label: 'Years of Expertise' },
+  { number: '6', label: 'Core Technology Domains' },
+  { number: '100%', label: 'Proprietary Architectures' },
+  { number: '24/7', label: 'Operational Telemetry' },
 ] as const;
 
 /* ─── Insights ───────────────────────────────────────────────── */
@@ -562,19 +389,19 @@ export const INSIGHTS = [
 
 export const LOCATIONS = {
   headquarters: {
-    name: 'India',
-    description: 'Remote Global Delivery',
+    name: 'Global Operations Center',
+    description: 'Architecting scalable systems from India',
     active: true,
   },
   remote: {
-    name: 'Global Collaboration',
-    description: 'Distributed team working across time zones',
+    name: 'Distributed Enterprise Teams',
+    description: 'Coordinated delivery across global time zones',
     active: true,
   },
   expansion: [
-    { name: 'Middle East', status: 'Future Presence' },
-    { name: 'Europe', status: 'Future Presence' },
-    { name: 'North America', status: 'Future Presence' },
+    { name: 'Middle East', status: 'Strategic Expansion' },
+    { name: 'Europe', status: 'Strategic Expansion' },
+    { name: 'North America', status: 'Strategic Expansion' },
   ],
 } as const;
 
@@ -584,42 +411,42 @@ export const FAQ_ITEMS = [
   {
     question: 'What services does Thazio provide?',
     answer:
-      'Thazio provides end-to-end technology services including digital & software development, AI, data & analytics, cloud infrastructure, technology consulting, and global capability centers.',
+      'We deliver end-to-end technology solutions, including enterprise software engineering, AI integration, cloud infrastructure, technology consulting, and the establishment of Global Capability Centers.',
   },
   {
     question: 'Do you build custom software?',
     answer:
-      'Yes. Every solution we build is custom-designed for your specific requirements. We don\'t use templates or one-size-fits-all approaches — each project is architected from the ground up to match your unique needs and goals.',
+      'Yes. Every architecture is proprietary and custom-engineered. We bypass templates in favor of scalable, secure systems designed specifically for your operational requirements.',
   },
   {
     question: 'Can AI solutions integrate with existing systems?',
     answer:
-      'Absolutely. Our AI solutions are designed to integrate seamlessly with your existing infrastructure through APIs, webhooks, and custom connectors. We ensure compatibility with your current technology stack.',
+      'Absolutely. Our AI deployments integrate securely with legacy infrastructure via custom APIs and webhooks, ensuring interoperability without disrupting existing workflows.',
   },
   {
     question: 'Do you support educational institutions?',
     answer:
-      'Yes. Education is one of our core domains. We build digital learning platforms, examination systems, academic analytics tools, and institutional management solutions for schools, colleges, and universities.',
+      'Yes. Education is one of our core domains. We build digital learning platforms, examination systems, academic analytics tools, and institutional management solutions for scaling education providers.',
   },
   {
     question: 'Can organizations automate workflows?',
     answer:
-      'Definitely. We specialize in workflow automation, AI agents, robotic process automation, and intelligent orchestration that eliminates manual bottlenecks and streamlines operations across your organization.',
+      'Definitely. We specialize in workflow automation, AI agents, and intelligent orchestration that eliminates manual bottlenecks and streamlines operations across your enterprise.',
   },
   {
     question: 'Do you offer cloud solutions?',
     answer:
-      'Yes. We offer comprehensive cloud services including architecture design, migration, DevOps automation, container orchestration, monitoring, security, and managed infrastructure across AWS, Google Cloud, and Azure.',
+      'Yes. We offer comprehensive cloud services including architecture design, migration, DevOps automation, container orchestration, and zero-trust security across AWS, Google Cloud, and Azure.',
   },
   {
     question: 'Which industries do you serve?',
     answer:
-      'We serve retail, advertising & media, education, telecommunications, healthcare, e-commerce, finance, and utilities. Our solutions are adaptable across any industry with complex operational needs.',
+      'We serve retail, advertising & media, education, telecommunications, healthcare, e-commerce, finance, and utilities. Our solutions are adaptable across any enterprise with complex operational scale.',
   },
   {
     question: 'How can we get started?',
     answer:
-      'Getting started is simple. Contact us through our form or email us at info@thazio.com to schedule a consultation. We will discuss your goals, evaluate technical feasibility, and propose a tailored execution roadmap.',
+      'Contact us through our portal or email us at info@thazio.com to schedule a consultation. We will discuss your strategic goals, evaluate technical feasibility, and propose an executive execution roadmap.',
   },
 ] as const;
 

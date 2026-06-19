@@ -172,7 +172,7 @@ export default function Navbar({ active = true }: NavbarProps) {
         </a>
 
         {/* Links (Desktop) */}
-        <ul className="navbar-links" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)' }}>
+        <ul className="navbar-links" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)', marginLeft: 'auto', marginRight: 'var(--space-8)' }}>
           {menuItems.map((item) => {
             if (item.isDropdown) {
               const dropdownList = dropdownItems[item.label as keyof typeof dropdownItems];

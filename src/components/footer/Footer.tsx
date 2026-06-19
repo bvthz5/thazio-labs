@@ -29,7 +29,7 @@ export default function Footer() {
               <span style={{ fontFamily: 'var(--font-logo)', fontWeight: 900, letterSpacing: '0.05em', color: 'var(--color-white)' }}>THAZIO</span>
             </div>
             <p>
-              Thazio Labs is an AI-first engineering company building intelligent software, autonomous systems, and data-driven solutions for businesses, institutions, and governments worldwide.
+              Thazio is an advanced engineering collective building intelligent software, autonomous systems, and scalable enterprise architectures for global organizations.
             </p>
           </div>
 

@@ -27,8 +27,8 @@ export default function InsightsSection() {
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <SectionHeading
           overline="NEWS & INSIGHTS"
-          title="Latest News"
-          description="Stay updated with our latest announcements, technical blogs, and breakthroughs."
+          title="Research & Insights"
+          description="Explore our latest publications on AI capabilities, autonomous systems, and enterprise architecture."
           centered
           light
         />
@@ -38,10 +38,10 @@ export default function InsightsSection() {
           {latestNews.map((item, index) => (
             <motion.div
               key={item.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, filter: 'blur(5px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link 
                 href={`/insights/${item.slug}/`}

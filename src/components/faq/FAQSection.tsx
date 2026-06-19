@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import SectionHeading from '../ui/SectionHeading';
 import { FAQ_ITEMS } from '@/lib/constants';
+import LightBackgroundAnimation from '../ui/LightBackgroundAnimation';
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -13,12 +14,13 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="faq-section section">
-      <div className="container">
+    <section id="faq" className="faq-section section" style={{ background: '#FFFFFF', position: 'relative' }}>
+      <LightBackgroundAnimation />
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <SectionHeading
           overline="FAQ"
-          title={"Frequently Asked\nQuestions"}
-          description="Answers to common questions about our services, approach, and capabilities."
+          title={"Enterprise Inquiries"}
+          description="Addressing strategic and technical considerations for prospective partners."
           centered
         />
 
@@ -30,10 +32,10 @@ export default function FAQSection() {
               <motion.div
                 key={i}
                 className="faq-item"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20, filter: 'blur(5px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.4, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
                 <button
                   className={`faq-question ${isOpen ? 'active' : ''}`}

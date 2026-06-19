@@ -7,7 +7,7 @@ import GlassButton from '../ui/GlassButton';
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="contact-section-new section">
+    <section id="contact" className="contact-section-new section section-dark" style={{ background: '#070A13' }}>
       {/* Decorative elements */}
       <div
         style={{
@@ -29,23 +29,26 @@ export default function ContactSection() {
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
           className="contact-luxury-card"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 40, filter: 'blur(5px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            boxShadow: 'var(--shadow-xl), 0 0 40px rgba(0, 102, 255, 0.05)'
+            background: 'linear-gradient(145deg, rgba(20, 24, 36, 0.9) 0%, rgba(10, 14, 26, 0.95) 100%)',
+            backdropFilter: 'blur(30px)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            boxShadow: '0 40px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            borderRadius: '32px',
           }}
         >
-          {/* Gradient top accent */}
-          <div className="contact-card-accent" />
 
           <div className="contact-luxury-inner">
             <SectionHeading
               overline="LET'S CONNECT"
-              title="Let's Build Intelligent Systems Together"
-              description="Collaborating with businesses, educational institutions, organizations, communities and innovators worldwide."
+              title="Ready to Accelerate Your Enterprise?"
+              description="Schedule an executive consultation with our engineering architects to map your technical strategy."
               centered
+              light
             />
 
             <div className="contact-buttons" style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -77,10 +80,12 @@ export default function ContactSection() {
               <a 
                 href="mailto:info@thazio.com" 
                 style={{ 
-                  fontSize: 'var(--text-lg)', 
-                  fontWeight: 500,
-                  color: 'var(--color-electric-blue-light)', 
-                  transition: 'color 0.3s ease',
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 'var(--text-xl)', 
+                  fontWeight: 600,
+                  letterSpacing: '-0.02em',
+                  color: '#FFFFFF', 
+                  transition: 'all 0.3s ease',
                   textDecoration: 'none'
                 }}
               >
