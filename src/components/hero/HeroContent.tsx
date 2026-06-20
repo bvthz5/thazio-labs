@@ -96,18 +96,28 @@ export default function HeroContent({ active = true }: HeroContentProps) {
         initial="hidden"
         animate={active ? "visible" : "hidden"}
       >
-        <span className="hero-title-line" style={{ display: 'block', marginBottom: '8px' }}>
-          {"Building Intelligent Systems".split('').map((char, index) => (
-            <motion.span key={index} variants={characterVariants} style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}>
-              {char}
-            </motion.span>
+        <span className="hero-title-line" style={{ display: 'block', marginBottom: '8px', whiteSpace: 'normal' }}>
+          {"Building Intelligent Systems".split(' ').map((word, wIdx, arr) => (
+            <span key={wIdx} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+              {word.split('').map((char, cIdx) => (
+                <motion.span key={cIdx} variants={characterVariants} style={{ display: 'inline-block' }}>
+                  {char}
+                </motion.span>
+              ))}
+              {wIdx < arr.length - 1 && <span style={{ display: 'inline-block', whiteSpace: 'pre' }}> </span>}
+            </span>
           ))}
         </span>
-        <span className="hero-title-line gradient" style={{ display: 'block', marginBottom: '24px' }}>
-          {"For Modern Enterprises".split('').map((char, index) => (
-            <motion.span key={index} variants={characterVariants} style={{ display: 'inline-block', whiteSpace: char === ' ' ? 'pre' : 'normal' }}>
-              {char}
-            </motion.span>
+        <span className="hero-title-line gradient" style={{ display: 'block', marginBottom: '24px', whiteSpace: 'normal' }}>
+          {"For Modern Enterprises".split(' ').map((word, wIdx, arr) => (
+            <span key={wIdx} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+              {word.split('').map((char, cIdx) => (
+                <motion.span key={cIdx} variants={characterVariants} style={{ display: 'inline-block' }}>
+                  {char}
+                </motion.span>
+              ))}
+              {wIdx < arr.length - 1 && <span style={{ display: 'inline-block', whiteSpace: 'pre' }}> </span>}
+            </span>
           ))}
         </span>
       </motion.h1>

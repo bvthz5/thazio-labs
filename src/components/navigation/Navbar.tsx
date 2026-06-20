@@ -69,7 +69,8 @@ export default function Navbar({ active = true }: NavbarProps) {
       setScrolled(currentScrollY > 10);
 
       // Dynamic theme matching based on active overlapping section
-      const sections = document.querySelectorAll('section, footer');
+      // Only select sections inside <main> to ignore dynamically injected widget sections
+      const sections = document.querySelectorAll('main section, footer');
       const navHeight = 80;
       let activeTheme: 'dark' | 'light' = 'dark'; // default to dark (hero)
 
@@ -172,7 +173,7 @@ export default function Navbar({ active = true }: NavbarProps) {
         </a>
 
         {/* Links (Desktop) */}
-        <ul className="navbar-links" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)', marginLeft: 'auto', marginRight: 'var(--space-8)' }}>
+        <ul className="navbar-links hide-mobile">
           {menuItems.map((item) => {
             if (item.isDropdown) {
               const dropdownList = dropdownItems[item.label as keyof typeof dropdownItems];
@@ -339,7 +340,7 @@ export default function Navbar({ active = true }: NavbarProps) {
         top: 'var(--nav-height)',
         left: 0,
         width: '100%',
-        height: 'calc(100vh - var(--nav-height))',
+        height: 'calc(100dvh - var(--nav-height))',
         background: theme === 'dark' ? 'rgba(10, 14, 26, 0.98)' : 'var(--glass-bg-strong)',
         backdropFilter: 'var(--glass-blur-strong)',
         WebkitBackdropFilter: 'var(--glass-blur-strong)',
@@ -370,7 +371,7 @@ export default function Navbar({ active = true }: NavbarProps) {
                     fontSize: 'var(--text-lg)',
                     fontWeight: 600,
                     color: theme === 'dark' ? 'var(--color-white)' : 'var(--color-obsidian)',
-                    padding: '8px 0',
+                    padding: '14px 0',
                     width: '100%',
                     display: 'flex',
                     alignItems: 'center',
@@ -402,6 +403,8 @@ export default function Navbar({ active = true }: NavbarProps) {
                           fontWeight: 500,
                           color: theme === 'dark' ? 'rgba(255,255,255,0.7)' : 'var(--color-slate)',
                           textDecoration: 'none',
+                          padding: '10px 0',
+                          display: 'block'
                         }}
                       >
                         {subItem.label}
@@ -423,7 +426,7 @@ export default function Navbar({ active = true }: NavbarProps) {
                 fontSize: 'var(--text-lg)',
                 fontWeight: 600,
                 color: theme === 'dark' ? 'var(--color-white)' : 'var(--color-obsidian)',
-                padding: '8px 0',
+                padding: '14px 0',
                 width: '100%',
                 textAlign: 'center'
               }}
